@@ -1,0 +1,16 @@
+
+.principal__row{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    z-index: 1;
+    width: 100%;
+    margin: auto;
+}
+
+.principal__banner{
+    width: 100%;
+    z-index: -1;
+    mask-image: linear-gradient(to bottom, rgba(0, 0,0,1), rgba(0, 0, 0, 0));
+    margin-bottom: -20%;
+}

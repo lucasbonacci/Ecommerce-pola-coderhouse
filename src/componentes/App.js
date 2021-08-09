@@ -1,10 +1,13 @@
 import React from 'react'
-import Menu from './Navbar'
+import Header from './Header'
+import Principal from './Principal'
+import './App.css'
 
 
 const App = () =>{
     return (<main>
-        <Menu/>
+        <Header/>
+        <Principal/>
     </main>)
 }
 
