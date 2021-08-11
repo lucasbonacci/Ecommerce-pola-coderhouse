@@ -101,4 +101,14 @@ const listaDeProductos =[
                     },
 ]
 
-export default listaDeProductos
+
+
+
+const  taskProductos = new Promise((resolve, reject) => {
+    setTimeout(() =>{
+        resolve(listaDeProductos)
+    },2000)
+})
+
+
+export default taskProductos

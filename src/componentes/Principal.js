@@ -1,10 +1,18 @@
-import React from 'react'
+import React, {useState, useEffect} from 'react'
 import './Principal.css'
 import polabanner from '../assets/bannermujer.jpg'
 import Productos from './Productos'
-import listaDeProductos from './ListaDeProductos'
+import taskProductos from './ListaDeProductos'
 
 function Principal() {
+
+    const [productos, setProductos] = useState([])
+
+    useEffect(() =>{
+        taskProductos.then(result => {setProductos(result)})
+    },[])
+
+
     return (
         <div className='principal'>
             <div className='principal__container'>
@@ -14,8 +22,9 @@ function Principal() {
                 alt="banner pola"
                 />
 
-                <div className='principal__row'> 
-                {listaDeProductos.map(e =>{
+                <div className='principal__row'>
+                {productos.length === 0? <h2>Cargando...</h2>:
+                productos.map(e =>{
                     return(
                     <Productos 
                     key={e.id}
