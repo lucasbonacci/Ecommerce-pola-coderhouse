@@ -15,7 +15,7 @@ const ItemDetailContainer = () => {
             {producto.map((e, itemId) =>{
                 itemId=1;
                 if (e.id === itemId){
-                    return <ItemDetail key={e.id} nombre={e.nombre} precio={e.precio} img={e.img} descripcion={e.descripcion} />
+                    return <ItemDetail key={e.id} nombre={e.nombre} precio={e.precio} img={e.img} descripcion={e.descripcion} min={e.min} stock={e.stock} />
                 }
             })}
         </div>

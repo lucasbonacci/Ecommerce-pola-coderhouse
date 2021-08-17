@@ -29,9 +29,6 @@ function Principal() {
                     <Productos 
                     key={e.id}
                     nombre={e.nombre}
-                    precio={e.precio}
-                    stock={e.stock}
-                    min={e.min} 
                     img={e.img}
                     />
                     )
