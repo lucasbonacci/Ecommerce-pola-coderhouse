@@ -9,7 +9,8 @@ const listaDeProductos =[
         precio: 950,
         img: cartera1,
         stock:10,
-        min:1 
+        min:1, 
+        descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.'
     },
     {
         id: 2,
@@ -17,7 +18,8 @@ const listaDeProductos =[
         precio: 700,
         img: cartera2,
         stock:1,
-        min:1 
+        min:1,
+        descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
     },
     {
         id: 3,
@@ -25,7 +27,8 @@ const listaDeProductos =[
         precio: 1500,
         img: aros,
         stock:7,
-        min:1 
+        min:1, 
+        descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
         },
         {
             id: 11,
@@ -33,7 +36,8 @@ const listaDeProductos =[
             precio: 950,
             img: cartera1,
             stock:10,
-            min:1 
+            min:1, 
+            descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
         },
         {
             id: 21,
@@ -41,7 +45,8 @@ const listaDeProductos =[
             precio: 700,
             img: cartera2,
             stock:1,
-            min:1 
+            min:1, 
+            descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
         },
         {
             id: 31,
@@ -49,7 +54,8 @@ const listaDeProductos =[
             precio: 1500,
             img: aros,
             stock:7,
-            min:1 
+            min:1, 
+            descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
             },
             {
                 id: 12,
@@ -57,7 +63,8 @@ const listaDeProductos =[
                 precio: 950,
                 img: cartera1,
                 stock:10,
-                min:1 
+                min:1, 
+                descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
             },
             {
                 id: 22,
@@ -65,7 +72,8 @@ const listaDeProductos =[
                 precio: 700,
                 img: cartera2,
                 stock:1,
-                min:1 
+                min:1, 
+                descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
             },
             {
                 id: 32,
@@ -73,7 +81,8 @@ const listaDeProductos =[
                 precio: 1500,
                 img: aros,
                 stock:7,
-                min:1 
+                min:1, 
+                descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
                 },
                 {
                     id: 13,
@@ -81,7 +90,8 @@ const listaDeProductos =[
                     precio: 950,
                     img: cartera1,
                     stock:10,
-                    min:1 
+                    min:1, 
+                    descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
                 },
                 {
                     id: 23,
@@ -89,7 +99,8 @@ const listaDeProductos =[
                     precio: 700,
                     img: cartera2,
                     stock:1,
-                    min:1 
+                    min:1, 
+                    descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
                 },
                 {
                     id: 33,
@@ -97,7 +108,8 @@ const listaDeProductos =[
                     precio: 1500,
                     img: aros,
                     stock:7,
-                    min:1 
+                    min:1, 
+                    descripcion: 'Lorem ipsum dolor sit amet, nam ne veri aeterno. Eos alia discere an, sed ne sale nobis. Quo mediocrem dissentias cu, everti accusamus vix ad, ne quot epicurei neglegentur mel. An latine sapientem forensibus quo. Placerat platonem pertinacia sed ne.' 
                     },
 ]
 
@@ -110,5 +122,6 @@ const  taskProductos = new Promise((resolve, reject) => {
     },2000)
 })
 
-
 export default taskProductos
+
+

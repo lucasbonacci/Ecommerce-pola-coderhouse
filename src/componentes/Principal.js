@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './Principal.css'
 import polabanner from '../assets/bannermujer.jpg'
 import Productos from './Productos'
-import taskProductos from './ListaDeProductos'
+import taskProductos  from './ListaDeProductos'
 
 function Principal() {
 
