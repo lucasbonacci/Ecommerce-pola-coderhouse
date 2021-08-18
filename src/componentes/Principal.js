@@ -2,29 +2,48 @@ import React, {useState, useEffect} from 'react'
 import './Principal.css'
 import polabanner from '../assets/bannermujer.jpg'
 import Productos from './Productos'
-import taskProductos  from './ListaDeProductos'
+import {taskProductos, taskProductosCategoria}  from './Api'
+import { useParams } from 'react-router-dom'
+import Loader from './Loader'
 
 function Principal() {
 
     const [productos, setProductos] = useState([])
+    const [loading, setLoading] = useState(false)
+    const { categoriaId } = useParams()
+    console.log(typeof categoriaId)
 
     useEffect(() =>{
-        taskProductos.then(result => {setProductos(result)})
-    },[])
+        setLoading(true)
+        if (categoriaId){
+            
+            taskProductosCategoria(categoriaId).then(result =>{
+                setLoading(false)
+                setProductos(result)
+                
+            })
+        } else{
+            taskProductos.then(result => {
+                setLoading(false)
+                setProductos(result)})
+            
+        }
+        
+    },[categoriaId])
 
 
     return (
         <div className='principal'>
+            
             <div className='principal__container'>
                 <img
                 className='principal__banner'
                 src={polabanner} 
                 alt="banner pola"
                 />
-
                 <div className='principal__row'>
-                {productos.length === 0? <h2>Cargando...</h2>:
-                productos.map(e =>{
+                {loading &&<Loader/>}
+                {!loading && productos.map(e =>{
                     return(
                     <Productos 
                     key={e.id}

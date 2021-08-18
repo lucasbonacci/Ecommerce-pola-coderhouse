@@ -18,6 +18,15 @@ function Header (){
                 <SearchIcon className='header__searchIcon'/>
             </div>
 
+            <div className='header__categorias'>
+                <Link to='/'><span>Categorias</span></Link>
+                <ul>
+                    <Link to='/category/joyas'><li>Joyas</li></Link>
+                    <Link to='/category/cartera'><li>Carteras</li></Link>
+                    <Link to='/category/collar'><li>Collares</li></Link>
+                </ul>
+            </div>
+
             <div className="header__nav">
                 <div className="header__option">
                     <span className='header__optionOne'>Hola Extraño</span>

@@ -1,6 +1,6 @@
 import React, {useState, useEffect} from 'react'
 import ItemDetail from './ItemDetail'
-import taskProductos from './ListaDeProductos'
+import {taskProductos} from './Api'
 
 
 const ItemDetailContainer = () => {

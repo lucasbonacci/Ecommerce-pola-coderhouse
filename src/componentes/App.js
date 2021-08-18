@@ -5,6 +5,7 @@ import CheckOut from './CheckOut'
 import './App.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
+import NotFound from './NotFound'
 
 
 const App = () =>{
@@ -19,8 +20,14 @@ const App = () =>{
                     <Route path='/itemDetail'>
                         <ItemDetailContainer/>
                     </Route>
-                    <Route path='/'>
+                    <Route path='/category/:categoriaId'>
                         <Principal/>
+                    </Route>
+                    <Route exact path='/'>
+                        <Principal/>
+                    </Route>
+                    <Route path='*'>
+                        <NotFound/>
                     </Route>
                 </Switch>
     </main>
