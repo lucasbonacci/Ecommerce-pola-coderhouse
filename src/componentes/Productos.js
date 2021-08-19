@@ -1,4 +1,4 @@
-import React, {useState} from 'react'
+import React from 'react'
 import './Producto.css'
 import { Link } from "react-router-dom";
 
@@ -14,7 +14,7 @@ function Productos({id,nombre, precio, img,stock,min}) {
             src={img}
             alt='Cartera de cuero negra'/> 
 
-            <Link to='/itemDetail'>
+            <Link to={`/itemDetail/${id}`}>
             <button className='producto__buttom'>VER PRODUCTO</button>
             </Link>
         </div>

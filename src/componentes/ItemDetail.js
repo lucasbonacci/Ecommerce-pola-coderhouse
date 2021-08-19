@@ -2,8 +2,10 @@ import React, {useState} from 'react'
 import './Producto.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
-const ItemDetail = ({nombre, precio, img,descripcion, stock, min}) => {
+const ItemDetail = ({producto}) => {
     
+    const {nombre, precio, img, stock, min} = producto
+
     const [count, setCount] = useState(min)
 
     const sumar= () =>{

@@ -11,7 +11,6 @@ function Principal() {
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(false)
     const { categoriaId } = useParams()
-    console.log(typeof categoriaId)
 
     useEffect(() =>{
         setLoading(true)
@@ -49,6 +48,7 @@ function Principal() {
                     key={e.id}
                     nombre={e.nombre}
                     img={e.img}
+                    id={e.id}
                     />
                     )
                 })}

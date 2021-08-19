@@ -17,7 +17,7 @@ const App = () =>{
                     <Route path='/carrito'>
                         <CheckOut/>
                     </Route>
-                    <Route path='/itemDetail'>
+                    <Route path='/itemDetail/:id'>
                         <ItemDetailContainer/>
                     </Route>
                     <Route path='/category/:categoriaId'>
