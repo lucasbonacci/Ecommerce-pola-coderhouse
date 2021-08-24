@@ -1,8 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import ItemDetail from './ItemDetail'
-import {taskProductosId} from './Api'
+import {taskProductosId} from '../api/Api'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
+import './ItemDetailContainer.css'
 
 const ItemDetailContainer = () => {
     const [producto, setProducto] = useState([])
@@ -21,7 +22,7 @@ const ItemDetailContainer = () => {
 
     console.log(producto)
     return (
-        <div>
+        <div className='loader'>
             {loading && <Loader/>}
             {producto.map(e =>{
                 return <ItemDetail producto={e} key={e.id}/>

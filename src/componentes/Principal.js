@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import './Principal.css'
 import polabanner from '../assets/bannermujer.jpg'
 import Productos from './Productos'
-import {taskProductos, taskProductosCategoria}  from './Api'
+import {taskProductos, taskProductosCategoria}  from '../api/Api'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
 

@@ -1,10 +1,10 @@
 import React, {useState} from 'react'
-import './Producto.css'
+import './ItemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 
 const ItemDetail = ({producto}) => {
     
-    const {nombre, precio, img, stock, min} = producto
+    const {nombre, precio, img, stock, min, descripcion} = producto
 
     const [count, setCount] = useState(min)
 
@@ -22,25 +22,32 @@ const ItemDetail = ({producto}) => {
 
 
     return (
-        <div>
-            <div className='producto'>
-            <div className='producto__info'>
-                <p> {nombre}</p>
-                <p className='producto__precio'> 
+        <div className='detail'>
+
+            <div className='detail__producto'>
+                <img 
+                    src={img}
+                    alt='Cartera de cuero negra'
+                    />
+            </div>
+
+            <div className='detail__info'>
+                <h2> {nombre}</h2>
+                <p> {descripcion}</p>
+                
+                <p className='detail__precio'> 
                     <small>$</small>
                     <strong>{precio}</strong>
                 </p>
+
+                <div className='detail__botones'>
+                    <button onClick={restar}> - </button>
+                    <span>{count}</span>
+                    <button onClick={sumar}> +</button>
+                    
+                </div>
+                <button className='detail__add'> < AddShoppingCartIcon/></button>
             </div>
-            <img 
-            src={img}
-            alt='Cartera de cuero negra'/>
-            <div className='producto__botones'>
-                <button onClick={restar}> - </button>
-                <span>{count}</span>
-            <button onClick={sumar}> +</button>
-            </div>
-            <button> < AddShoppingCartIcon/></button>
-        </div>
         </div>
     )
 }
