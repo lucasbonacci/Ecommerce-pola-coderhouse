@@ -1,12 +1,15 @@
 import React, {useState} from 'react'
 import './ItemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
+import BotonCompra from './BotonCompra';
 
 const ItemDetail = ({producto}) => {
     
     const {nombre, precio, img, stock, min, descripcion} = producto
 
     const [count, setCount] = useState(min)
+    const [compra, setCompra] = useState(false)
+    const [unidades, setUnidades] = useState(0)
 
     const sumar= () =>{
         if(count < stock){
@@ -20,6 +23,11 @@ const ItemDetail = ({producto}) => {
         }
     }
 
+    const addToCart=()=>{
+        setUnidades(count)
+        setCompra(true)
+        
+    }
 
     return (
         <div className='detail'>
@@ -46,7 +54,9 @@ const ItemDetail = ({producto}) => {
                     <button onClick={sumar}> +</button>
                     
                 </div>
-                <button className='detail__add'> < AddShoppingCartIcon/></button>
+                <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>
+                {compra && <p> Se añadio al carrito {unidades} unidades de {nombre} </p>}
+                {compra && <BotonCompra/>}
             </div>
         </div>
     )
