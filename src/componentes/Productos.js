@@ -8,7 +8,7 @@ function Productos({id,nombre, precio, img,stock,min}) {
     return (
         <div className='producto'>
             <div className='producto__info'>
-                <p> {nombre}</p>
+                <p> {nombre.toUpperCase()}</p>
             </div>
             <img 
             src={img}

@@ -4,8 +4,10 @@ import logopola from '../assets/pola.jpg'
 import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from "react-router-dom";
+import {useStateValue} from '../StateProvider'
 
 function Header (){
+    const [{carrito, dispatch}] = useStateValue()
     return (
         <div className="header">
             <Link to='/'>
@@ -36,7 +38,7 @@ function Header (){
                 <Link to='/carrito'>
                 <div className="header__optionCart">
                     <ShoppingCartIcon />
-                    <span className='header__optionLineTwo header__cartCount' >0</span>
+                    <span className='header__optionLineTwo header__cartCount' >{carrito.length}</span>
                 </div>
                 </Link>
             </div>

@@ -8,13 +8,21 @@
     z-index: 100;
     color: white;
     overflow: hidden;
+    box-shadow: inset 0px -5px 10px gray;
 }
 
 .header__logo{
     width: 80px;
     object-fit: contain;
     margin: 0px 20px;
+    transition: all 2000ms;
+    overflow: hidden;
 }
+
+.header__logo:hover{
+    transform:scale(0.8) rotate(360deg); 
+}
+
 
 .header__search{
     display: flex;

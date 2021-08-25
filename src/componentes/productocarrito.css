@@ -1,0 +1,7 @@
+.productoscarrito{
+    display: flex;
+    flex-direction: column;
+    width: 20%;
+    height: 200px;
+    border-bottom: 1px solid gray;
+}

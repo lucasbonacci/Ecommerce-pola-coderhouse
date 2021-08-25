@@ -2,14 +2,18 @@ import React, {useState} from 'react'
 import './ItemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import BotonCompra from './BotonCompra';
+import { useStateValue } from '../StateProvider';
 
 const ItemDetail = ({producto}) => {
     
-    const {nombre, precio, img, stock, min, descripcion} = producto
+    const {nombre, precio, img, stock, min, descripcion, id} = producto
 
     const [count, setCount] = useState(min)
     const [compra, setCompra] = useState(false)
     const [unidades, setUnidades] = useState(0)
+    const [{carrito}, enviar] = useStateValue()
+    const [nuevoStock, setNuevoStock] = useState(stock)
+
 
     const sumar= () =>{
         if(count < stock){
@@ -23,11 +27,27 @@ const ItemDetail = ({producto}) => {
         }
     }
 
+    function actualizarStock(stock,count){
+        setNuevoStock(stock - count)
+    }
+
     const addToCart=()=>{
         setUnidades(count)
+        for(let i=0; i < count; i++){
+            enviar({
+                type: 'Agregar_al_Carrito',
+                item:{
+                    id: id,
+                    nombre: nombre,
+                    img: img,
+                    precio:precio 
+                }
+            })
+        }
         setCompra(true)
-        
+        actualizarStock(stock,count)
     }
+
 
     return (
         <div className='detail'>
@@ -42,6 +62,7 @@ const ItemDetail = ({producto}) => {
             <div className='detail__info'>
                 <h2> {nombre}</h2>
                 <p> {descripcion}</p>
+                <p> Stock disponible: <strong>{nuevoStock}</strong></p>
                 
                 <p className='detail__precio'> 
                     <small>$</small>
@@ -49,14 +70,13 @@ const ItemDetail = ({producto}) => {
                 </p>
 
                 <div className='detail__botones'>
-                    <button onClick={restar}> - </button>
-                    <span>{count}</span>
-                    <button onClick={sumar}> +</button>
+                    {!compra? <button onClick={restar}> - </button>: null}
+                    {!compra? <span>{count}</span> : null}
+                    {!compra? <button onClick={sumar}> +</button>: null}
                     
                 </div>
-                <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>
-                {compra && <p> Se añadio al carrito {unidades} unidades de {nombre} </p>}
-                {compra && <BotonCompra/>}
+                {!compra? <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>: <BotonCompra/> }
+                {compra && <p> Se añadio al carrito {count} unidades de {nombre} </p>}
             </div>
         </div>
     )

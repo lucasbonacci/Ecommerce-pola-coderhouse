@@ -11,6 +11,12 @@
     z-index: 1;
     box-shadow: 10px 5px 5px #ccc;
     background-color: white;
+    transition: all 300ms;
+}
+
+
+.producto:hover{
+   transform: scale(1.1);
 }
 
 @media (max-width: 480px){

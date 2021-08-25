@@ -2,6 +2,7 @@ import React from 'react'
 import Header from './Header'
 import Principal from './Principal'
 import CheckOut from './CheckOut'
+import Footer from './Footer'
 import './App.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
@@ -30,6 +31,7 @@ const App = () =>{
                         <NotFound/>
                     </Route>
                 </Switch>
+            <Footer/>
     </main>
         </Router>)
 }

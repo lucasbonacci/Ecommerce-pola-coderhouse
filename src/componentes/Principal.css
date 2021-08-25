@@ -8,6 +8,13 @@
     margin: auto;
 }
 
+.principal__row p{
+    font-size: 20px;
+    font-weight: 600;
+}
+
+
+
 .principal__banner{
     width: 100%;
     z-index: -1;
