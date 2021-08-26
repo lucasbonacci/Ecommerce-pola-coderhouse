@@ -10,7 +10,6 @@ const ItemDetail = ({producto}) => {
 
     const [count, setCount] = useState(min)
     const [compra, setCompra] = useState(false)
-    const [unidades, setUnidades] = useState(0)
     const [{carrito}, enviar] = useStateValue()
     const [nuevoStock, setNuevoStock] = useState(stock)
 
@@ -32,10 +31,9 @@ const ItemDetail = ({producto}) => {
     }
 
     const addToCart=()=>{
-        setUnidades(count)
         for(let i=0; i < count; i++){
             enviar({
-                type: 'Agregar_al_Carrito',
+                type: 'agregarAlCarrito',
                 item:{
                     id: id,
                     nombre: nombre,

@@ -7,7 +7,7 @@ import { Link } from "react-router-dom";
 import {useStateValue} from '../StateProvider'
 
 function Header (){
-    const [{carrito, dispatch}] = useStateValue()
+    const [{carrito}, dispatch] = useStateValue()
     return (
         <div className="header">
             <Link to='/'>

@@ -5,7 +5,13 @@ import Total from './Total'
 import { useStateValue } from '../StateProvider';
 
 function CheckOut() {
-    const [{carrito}, enviar] = useStateValue()
+    const [{carrito}, dispatch] = useStateValue()
+
+    const vaciarCarrito = () =>{
+        dispatch({
+            type: 'vaciarCarrito',
+        })
+    }
 
     return (
         <div className='checkout'>
@@ -18,9 +24,10 @@ function CheckOut() {
                             nombre={e.nombre}
                             img={e.img}
                             precio={e.precio}
+                            id={e.id}
                         />
                     })}
-                    <button> vaciar carrito</button>
+                    <button onClick={vaciarCarrito}> vaciar carrito</button>
                 </div>
 
             </div>

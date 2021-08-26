@@ -9,7 +9,6 @@ const ItemDetailContainer = () => {
     const [producto, setProducto] = useState([])
     const [loading, setLoading] = useState(false)
     const {id} = useParams()
-    console.log(typeof id)
 
     useEffect(() =>{
         setLoading(true)
@@ -20,7 +19,6 @@ const ItemDetailContainer = () => {
             })
     },[id])
 
-    console.log(producto)
     return (
         <div className='loader'>
             {loading && <Loader/>}
