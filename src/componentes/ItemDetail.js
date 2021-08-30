@@ -80,7 +80,7 @@ const ItemDetail = ({producto}) => {
                     
                 </div>
                 {!compra? <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>: <BotonCompra/> }
-                {compra && <p> Se añadio al carrito {count} unidades de {nombre} </p>}
+                {compra && <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {nombre} </p>}
             </div>
         </div>
     )
