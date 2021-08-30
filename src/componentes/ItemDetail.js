@@ -1,8 +1,9 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './ItemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import BotonCompra from './BotonCompra';
 import { useStateValue } from '../StateProvider';
+
 
 const ItemDetail = ({producto}) => {
     
@@ -28,7 +29,6 @@ const ItemDetail = ({producto}) => {
 
     function actualizarStock(stock,count){
         setNuevoStock(stock - count)
-        setCount(stock - count)
     }
 
     const addToCart=()=>{
@@ -46,6 +46,11 @@ const ItemDetail = ({producto}) => {
         setCompra(true)
         actualizarStock(stock,count)
     }
+
+    useEffect(() => {
+        setNuevoStock(stock - count)
+        
+    }, [count])
 
 
     return (

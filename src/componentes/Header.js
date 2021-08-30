@@ -41,7 +41,7 @@ function Header (){
                 <Link to='/carrito'>
                 <div className="header__optionCart">
                     <ShoppingCartIcon />
-                    <span className='header__optionLineTwo header__cartCount' >{cantidad}</span>
+                    <span className='header__optionLineTwo header__cartCount' >{cantidad ===0? <></>: cantidad }</span>
                 </div>
                 </Link>
             </div>

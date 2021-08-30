@@ -3,6 +3,7 @@ import './CheckOut.css'
 import ProductosCarrito from './ProductosCarrito'
 import Total from './Total'
 import { useStateValue } from '../StateProvider';
+import { Link } from "react-router-dom";
 
 function CheckOut() {
     const [{carrito}, dispatch] = useStateValue()
@@ -18,7 +19,8 @@ function CheckOut() {
             <div className='checkout__izquierda'>
                 <div className='checkout__titulo'>
                     <h2>Tus compras</h2>
-                    {carrito.map(e =>{
+                    {carrito.length === 0? <p>Tu carrito esta vacio </p>:
+                    carrito.map(e =>{
                         return <ProductosCarrito
                             key={e.id}
                             nombre={e.nombre}
@@ -28,7 +30,7 @@ function CheckOut() {
                             quantity={e.quantity}
                         />
                     })}
-                    <button onClick={vaciarCarrito}> vaciar carrito</button>
+                    {carrito.length ===0? <Link to='/'><button> Ir a comprar </button></Link> :<button onClick={vaciarCarrito}> vaciar carrito</button>}
                 </div>
 
             </div>
