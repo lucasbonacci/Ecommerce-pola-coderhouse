@@ -25,6 +25,7 @@ function CheckOut() {
                             img={e.img}
                             precio={e.precio}
                             id={e.id}
+                            quantity={e.quantity}
                         />
                     })}
                     <button onClick={vaciarCarrito}> vaciar carrito</button>

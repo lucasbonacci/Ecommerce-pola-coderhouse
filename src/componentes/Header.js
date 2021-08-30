@@ -5,9 +5,12 @@ import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link } from "react-router-dom";
 import {useStateValue} from '../StateProvider'
+import {quantityTotal} from '../Reducer' 
 
 function Header (){
     const [{carrito}, dispatch] = useStateValue()
+
+    let cantidad = quantityTotal(carrito)
     return (
         <div className="header">
             <Link to='/'>
@@ -38,7 +41,7 @@ function Header (){
                 <Link to='/carrito'>
                 <div className="header__optionCart">
                     <ShoppingCartIcon />
-                    <span className='header__optionLineTwo header__cartCount' >{carrito.length}</span>
+                    <span className='header__optionLineTwo header__cartCount' >{cantidad}</span>
                 </div>
                 </Link>
             </div>

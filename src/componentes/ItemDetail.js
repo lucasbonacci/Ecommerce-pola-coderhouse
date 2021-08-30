@@ -28,20 +28,21 @@ const ItemDetail = ({producto}) => {
 
     function actualizarStock(stock,count){
         setNuevoStock(stock - count)
+        setCount(stock - count)
     }
 
     const addToCart=()=>{
-        for(let i=0; i < count; i++){
             enviar({
                 type: 'agregarAlCarrito',
                 item:{
                     id: id,
                     nombre: nombre,
                     img: img,
-                    precio:precio 
+                    precio: precio * count,
+                    quantity: count
                 }
+            
             })
-        }
         setCompra(true)
         actualizarStock(stock,count)
     }
