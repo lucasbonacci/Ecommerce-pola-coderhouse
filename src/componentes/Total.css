@@ -22,3 +22,9 @@
     text-align: center;
     margin: auto;
 }
+
+@media (max-width:888px){
+    .total > button{
+        width: 100%;
+    }
+}

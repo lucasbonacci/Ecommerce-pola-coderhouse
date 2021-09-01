@@ -30,7 +30,7 @@ function CheckOut() {
                             quantity={e.quantity}
                         />
                     })}
-                    {carrito.length ===0? <Link to='/'><button> Ir a comprar </button></Link> :<button onClick={vaciarCarrito}> vaciar carrito</button>}
+                    {carrito.length ===0? <Link to='/'><button className="checkout__btn"> Ir a comprar </button></Link> :<button onClick={vaciarCarrito} className="checkout__btn"> vaciar carrito</button>}
                 </div>
 
             </div>

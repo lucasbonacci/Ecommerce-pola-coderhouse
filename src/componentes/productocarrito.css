@@ -2,13 +2,10 @@
     display: flex;
     margin-top: 20px;
     margin-bottom: 20px;
-    box-shadow: 10px 5px 5px #ccc;
     transition: all 300ms;
+    box-shadow: 10px 5px 5px #ccc;
 }
 
-.productoscarrito:hover{
-    transform: scale(1,1);
-}
 
 .productoscarrito__img{
     object-fit: contain;

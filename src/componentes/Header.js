@@ -1,14 +1,18 @@
 import  React  from "react";
 import './Header.css'
 import logopola from '../assets/pola.jpg'
-import SearchIcon from '@material-ui/icons/Search';
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import {useStateValue} from '../StateProvider'
 import {quantityTotal} from '../Reducer' 
 
 function Header (){
     const [{carrito}, dispatch] = useStateValue()
+
+    let history = useHistory()
+    const onChange = (e) =>{
+        history.push(`/${e.target.value}`)
+    }
 
     let cantidad = quantityTotal(carrito)
     return (
@@ -18,19 +22,18 @@ function Header (){
                 src={logopola}
                 alt="pola accesorios" />
             </Link>
+
+
             <div className="header__search">
-                <input className="header__searchInput" placeholder='Buscar producto' type="text"/>
-                <SearchIcon className='header__searchIcon'/>
+                <select onChange={onChange} className="header__searchInput">
+                <option vale="" disabled selected>Buscar productos</option>   
+                <option value="">Todos los productos</option>
+                <option value="category/cartera">Carteras</option>
+                <option value="category/joyas">Pendientes</option>
+                <option value="category/collar">Collares</option>
+                </select>
             </div>
 
-            <div className='header__categorias'>
-                <Link to='/'><span>Categorias</span></Link>
-                <ul>
-                    <Link to='/category/joyas'><li>Joyas</li></Link>
-                    <Link to='/category/cartera'><li>Carteras</li></Link>
-                    <Link to='/category/collar'><li>Collares</li></Link>
-                </ul>
-            </div>
 
             <div className="header__nav">
                 <div className="header__option">
@@ -38,12 +41,13 @@ function Header (){
                     <span className='header__optionTwo'>Ingresar</span>
                 </div>
 
-                <Link to='/carrito'>
+                
                 <div className="header__optionCart">
+                    <Link to='/carrito'>
                     <ShoppingCartIcon />
-                    <span className='header__optionLineTwo header__cartCount' >{cantidad ===0? <></>: cantidad }</span>
+                    </Link>
+                    <span className='header__cartCount' >{cantidad ===0? <></>: cantidad }</span>
                 </div>
-                </Link>
             </div>
         </div>
     )

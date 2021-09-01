@@ -2,9 +2,9 @@ import React, {useState, useEffect} from 'react'
 import './Principal.css'
 import polabanner from '../assets/bannermujer.jpg'
 import Productos from './Productos'
-import {taskProductos, taskProductosCategoria}  from '../api/Api'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
+import { getFirestore } from '../firebase/firebase-data'
 
 function Principal() {
 
@@ -13,21 +13,36 @@ function Principal() {
     const { categoriaId } = useParams()
 
     useEffect(() =>{
+        const db = getFirestore()
+        const itemColecction = db.collection('productos')
         setLoading(true)
-        if (categoriaId){
-            
-            taskProductosCategoria(categoriaId).then(result =>{
-                setLoading(false)
-                setProductos(result)
-                
+
+        if(categoriaId){
+            itemColecction.where('categoria', "==", categoriaId)
+            .get()
+            .then(querySnapshot =>{
+                if (querySnapshot.size === 0){
+                    alert('no hay productos')
+                } else{
+                    setProductos(querySnapshot.docs.map(document =>({
+                        id: document.id, ...document.data()
+                    })))
+                    setLoading(false)
+                }
             })
         } else{
-            taskProductos.then(result => {
-                setLoading(false)
-                setProductos(result)})
-            
+            itemColecction.get().then(querySnapshot =>{
+                if(querySnapshot.size === 0){
+                    alert('no hay productos')
+                } else{
+                    setProductos(querySnapshot.docs.map(document =>({
+                        id: document.id, ...document.data()
+                    })))
+                    setLoading(false)
+                }
+            })
         }
-        
+
     },[categoriaId])
 
 

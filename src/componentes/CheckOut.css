@@ -3,37 +3,47 @@
     display: flex;
     padding: 20px;
     background-color: white;
-    flex-wrap: wrap;
+    
     width: 90%;
 }
 
-@media (max-width: 973px){
+
+@media (max-width:888px){
     .checkout{
         flex-direction: column;
         width: 90%;
-    }
-    .checkout__derecha{
-        width: 100%;
+        flex-wrap: wrap;
     }
     .checkout__izquierda{
         width: 100%;
     }
 
-}
 
-.checkout__titulo{
-    margin-right: 10px;
-    padding: 10px;
 }
 
 
 .checkout__izquierda{
-    width: 40%;
-
+    width: auto;
 }
+
+
+.checkout__titulo{
+    margin-right: 10px;
+    padding: 10px;
+    width: 90%;
+}
+
 
 .checkout__derecha{
     margin-top: 30px;
-    width: 60%;
+    width: 50%;
 }
 
+.checkout__btn{
+    background-color: black;
+    color: white;
+    border-radius: 10px;
+    margin-top: 20px;
+    cursor: pointer;
+    font-size: 16px;
+}

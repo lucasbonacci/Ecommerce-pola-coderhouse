@@ -18,7 +18,7 @@ const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
         <div className='productoscarrito'>
             <img className='productoscarrito__img' src={img}/>
             <div className='productoscarrito__info'>
-                <p className='productoscarrito__nombre'>{nombre}</p>
+                <p className='productoscarrito__nombre'>{nombre.toUpperCase()}</p>
                 <p className='productoscarrito__price'>
                     <small>$</small>
                     <strong>{precio}</strong>
@@ -28,6 +28,6 @@ const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
             </div>
         </div>
     )
-}
+} 
 
 export default ProductosCarrito

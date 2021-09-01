@@ -70,7 +70,17 @@
     display: flex;
     align-items: center;
     color: white;
+    text-decoration: none;
+    list-style: none;
 }
+
+.header__optionCart > a {
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+
+
 
 .header__cartCount{
     margin-left: 10px;
@@ -78,37 +88,5 @@
 }
 
 
-.header__categorias{
-    text-align: center;
-    display: flex;
-    flex-direction: column;
-    margin-left: 40px;
-    list-style-type: none;
-}
-
-.header__categorias a{
-    color: white;
-    text-decoration: none;
-}
-
-.header__categorias span{
-    border-bottom: 1px solid white;
-    text-decoration: none;
-}
 
 
-.header__categorias ul li{
-    list-style-type: none;
-}
-
-.header__categorias ul li:hover{
-    cursor: pointer;
-    font-size: 20px;
-}
-
-
-@media (max-width: 480px){
-    .header__search{
-        display:none;
-    }
-}

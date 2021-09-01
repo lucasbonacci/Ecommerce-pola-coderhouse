@@ -3,11 +3,10 @@ import './ItemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import BotonCompra from './BotonCompra';
 import { useStateValue } from '../StateProvider';
+import { Link } from 'react-router-dom'
 
-
-const ItemDetail = ({producto}) => {
+const ItemDetail = ({nombre, precio, img, stock, min, descripcion, id}) => {
     
-    const {nombre, precio, img, stock, min, descripcion, id} = producto
 
     const [count, setCount] = useState(min)
     const [compra, setCompra] = useState(false)
@@ -27,10 +26,6 @@ const ItemDetail = ({producto}) => {
         }
     }
 
-    function actualizarStock(stock,count){
-        setNuevoStock(stock - count)
-    }
-
     const addToCart=()=>{
             enviar({
                 type: 'agregarAlCarrito',
@@ -44,8 +39,10 @@ const ItemDetail = ({producto}) => {
             
             })
         setCompra(true)
-        actualizarStock(stock,count)
-    }
+        
+            
+        setNuevoStock(stock - count)
+}
 
     useEffect(() => {
         setNuevoStock(stock - count)
@@ -70,7 +67,7 @@ const ItemDetail = ({producto}) => {
                 
                 <p className='detail__precio'> 
                     <small>$</small>
-                    <strong>{precio}</strong>
+                    <strong>{precio * count}</strong>
                 </p>
 
                 <div className='detail__botones'>

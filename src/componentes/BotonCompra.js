@@ -12,3 +12,4 @@ const BotonCompra = () => {
 }
 
 export default BotonCompra
+ 
