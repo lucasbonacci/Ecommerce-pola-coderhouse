@@ -1,16 +1,15 @@
 import React, {useState, useEffect} from 'react'
-import './ItemDetail.css'
+import './css/itemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import BotonCompra from './BotonCompra';
-import { useStateValue } from '../StateProvider';
+import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom'
 
-const ItemDetail = ({nombre, precio, img, stock, min, descripcion, id}) => {
+const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
     
 
-    const [count, setCount] = useState(min)
+    const [count, setCount] = useState(1)
     const [compra, setCompra] = useState(false)
-    const [{carrito}, enviar] = useStateValue()
+    const [,enviar] = useStateValue()
     const [nuevoStock, setNuevoStock] = useState(stock)
 
 
@@ -21,7 +20,7 @@ const ItemDetail = ({nombre, precio, img, stock, min, descripcion, id}) => {
     }
 
     const restar = () =>{
-        if(count > min){
+        if(count > 1){
         setCount(count - 1)
         }
     }
@@ -34,20 +33,17 @@ const ItemDetail = ({nombre, precio, img, stock, min, descripcion, id}) => {
                     nombre: nombre,
                     img: img,
                     precio: precio * count,
-                    quantity: count
+                    quantity: count,
                 }
             
             })
         setCompra(true)
-        
-            
-        setNuevoStock(stock - count)
 }
 
     useEffect(() => {
         setNuevoStock(stock - count)
         
-    }, [count])
+    },)
 
 
     return (
@@ -76,7 +72,11 @@ const ItemDetail = ({nombre, precio, img, stock, min, descripcion, id}) => {
                     {!compra? <button onClick={sumar}> +</button>: null}
                     
                 </div>
-                {!compra? <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>: <BotonCompra/> }
+                {!compra? <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>: 
+                <div className='botoncompra'>
+                    <Link to='/carrito'><button>Finalizar Compra</button></Link>
+                    <Link to='/'><button>Seguir Comprando</button></Link>
+                </div> }
                 {compra && <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {nombre} </p>}
             </div>
         </div>

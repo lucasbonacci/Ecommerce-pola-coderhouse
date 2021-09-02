@@ -1,12 +1,12 @@
 import React from 'react'
-import './Total.css'
+import './css/total.css'
 import CurrencyFormat from 'react-currency-format'
-import { useStateValue } from '../StateProvider';
-import { carritoTotal } from '../Reducer';
-import {quantityTotal} from '../Reducer' 
+import { useStateValue } from '../context/StateProvider';
+import { carritoTotal } from '../context/Reducer';
+import {quantityTotal} from '../context/Reducer' 
 
 function Total() {
-    const [{carrito}, enviar] = useStateValue()
+    const [{carrito}] = useStateValue()
 
     let cantidad = quantityTotal(carrito)
     return (

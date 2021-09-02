@@ -1,12 +1,12 @@
 import React, {useState, useEffect} from 'react'
-import './Principal.css'
+import './css/itemListContainer.css'
 import polabanner from '../assets/bannermujer.jpg'
-import Productos from './Productos'
+import ItemList from './ItemList'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
 import { getFirestore } from '../firebase/firebase-data'
 
-function Principal() {
+function ItemListContainer() {
 
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(false)
@@ -45,7 +45,6 @@ function Principal() {
 
     },[categoriaId])
 
-
     return (
         <div className='principal'>
             
@@ -59,7 +58,7 @@ function Principal() {
                 {loading &&<Loader/>}
                 {!loading && productos.map(e =>{
                     return(
-                    <Productos 
+                    <ItemList 
                     key={e.id}
                     nombre={e.nombre}
                     img={e.img}
@@ -74,4 +73,4 @@ function Principal() {
     )
 }
 
-export default Principal
+export default ItemListContainer

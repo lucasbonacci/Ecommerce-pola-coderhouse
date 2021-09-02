@@ -3,11 +3,12 @@
     flex-direction: column;
     padding-top: 20px;
     text-align: center;
-    width: 100%;
+    
     background-color: black;
     color: white;
-    margin-top: 150px;
     justify-content: center;
+    width: 100%;
+    
 }
 
 

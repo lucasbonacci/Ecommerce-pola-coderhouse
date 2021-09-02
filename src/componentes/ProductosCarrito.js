@@ -1,22 +1,22 @@
 import React from 'react'
-import './productocarrito.css'
-import { useStateValue } from '../StateProvider'
+import './css/productocarrito.css'
+import { useStateValue } from '../context/StateProvider'
 
 const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
     
-    const [{carrito}, dispatch] = useStateValue()
+    const [,dispatch] = useStateValue()
 
     const eliminarDelCarrito=()=>{
         dispatch({
             type:'eliminarDelCarrito',
             id:id,
             
-        },console.log(id))
+        })
     }
 
     return (
         <div className='productoscarrito'>
-            <img className='productoscarrito__img' src={img}/>
+            <img className='productoscarrito__img' src={img} alt={nombre}/>
             <div className='productoscarrito__info'>
                 <p className='productoscarrito__nombre'>{nombre.toUpperCase()}</p>
                 <p className='productoscarrito__price'>

@@ -1,9 +1,9 @@
 import React from 'react'
-import Header from './Header'
-import Principal from './Principal'
-import CheckOut from './CheckOut'
+import NavBar from './NavBar'
+import ItemListContainer from './ItemListContainer'
+import Cart from './Cart'
 import Footer from './Footer'
-import './App.css'
+import './css/app.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
 import NotFound from './NotFound'
@@ -13,19 +13,19 @@ const App = () =>{
     return (
         <Router>
             <main>
-            <Header/>
+            <NavBar/>
                 <Switch>
                     <Route path='/carrito'>
-                        <CheckOut/>
+                        <Cart/>
                     </Route>
-                    <Route path='/itemDetail/:id'>
+                    <Route path='/itemDetail/:catId'>
                         <ItemDetailContainer/>
                     </Route>
                     <Route path='/category/:categoriaId'>
-                        <Principal/>
+                        <ItemListContainer/>
                     </Route>
                     <Route exact path='/'>
-                        <Principal/>
+                        <ItemListContainer/>
                     </Route>
                     <Route path='*'>
                         <NotFound/>

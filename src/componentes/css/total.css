@@ -5,8 +5,9 @@
     width: 70%;
     height: 100px;
     padding: 20px;
-    box-shadow: 10px 5px 5px #ccc;
-    border: 1px solid #dddddd;
+    background-color: white;
+    box-shadow: 1px 1px 5px white;
+    border: 1px solid black;
     border-radius: 3px;
     text-align: center;
 }

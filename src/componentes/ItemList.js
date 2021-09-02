@@ -1,9 +1,9 @@
 import React from 'react'
-import './Producto.css'
+import './css/itemList.css'
 import { Link } from "react-router-dom";
 
 
-function Productos({id,nombre, precio, img,stock,min}) {
+function ItemList({id,nombre,img}) {
 
     return (
         <div className='producto'>
@@ -21,4 +21,4 @@ function Productos({id,nombre, precio, img,stock,min}) {
     )
 }
 
-export default Productos
+export default ItemList

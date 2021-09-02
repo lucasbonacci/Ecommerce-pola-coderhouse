@@ -1,7 +1,8 @@
 
 export const initialState = {
-    carrito: []
+    carrito: [],
 }
+
 
 export const carritoTotal = (carrito) => 
     carrito.reduce((monto, item) => item.precio + monto, 0);
@@ -14,14 +15,9 @@ const reducer = (state, action) => {
     switch(action.type){
         case 'agregarAlCarrito':{
             let itemInCart = state.carrito.some(item => item.id === action.item.id)
-            console.log('esto es boolean', itemInCart)
-            console.log(state.carrito)
-            
-
 
             if (itemInCart){
                 let index = state.carrito.findIndex(el => el.id === action.item.id)
-                console.log(index)
                 let newCarrito = state.carrito
                 
                 newCarrito[index].quantity += action.item.quantity
@@ -38,7 +34,6 @@ const reducer = (state, action) => {
                 }
             }
         }
-
         
         case 'eliminarDelCarrito':
             const index = state.carrito.findIndex(
@@ -49,7 +44,6 @@ const reducer = (state, action) => {
                 nuevoCarrito.splice(index,1)
             } else{
                 console.log(`error ${action.id}`)
-                console.log(index)
             }
 
             return{

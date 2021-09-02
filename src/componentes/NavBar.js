@@ -1,13 +1,13 @@
 import  React  from "react";
-import './Header.css'
+import './css/navbar.css'
 import logopola from '../assets/pola.jpg'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";
-import {useStateValue} from '../StateProvider'
-import {quantityTotal} from '../Reducer' 
+import {useStateValue} from '../context/StateProvider'
+import {quantityTotal} from '../context/Reducer' 
 
-function Header (){
-    const [{carrito}, dispatch] = useStateValue()
+function NavBar (){
+    const [{carrito}] = useStateValue()
 
     let history = useHistory()
     const onChange = (e) =>{
@@ -53,4 +53,4 @@ function Header (){
     )
 }
 
-export default Header
+export default NavBar

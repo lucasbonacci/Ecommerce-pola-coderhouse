@@ -6,6 +6,8 @@
     z-index: 1;
     width: 100%;
     margin: auto;
+    background-color: #ccc;
+    padding-bottom: 150px;
 }
 
 .principal__row p{
