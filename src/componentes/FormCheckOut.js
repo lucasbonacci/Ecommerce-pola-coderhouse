@@ -1,6 +1,8 @@
 import { useForm } from "../hooks/useForm";
 import './css/formcheckout.css'
 import Total from "./Total";
+import Loader from "./Loader";
+import { Link } from "react-router-dom";
 
 const initialForm ={
     name:'',
@@ -110,11 +112,18 @@ const FormCheckOut = () =>{
                 
             </div>
         </div>
+        
         :
+
         <div className='order'>
-            <p>Gracias por tu id de compra es {orderId}</p>
+            {loading? <Loader/>: 
+            <div> 
+                <p>Gracias por tu compra, la id de tu orden es {orderId}</p> 
+                <Link to='/'><button className="order__btn">Volver al menu</button></Link>
+            </div>}
         </div>}
         </>
+        
     )
 }
 

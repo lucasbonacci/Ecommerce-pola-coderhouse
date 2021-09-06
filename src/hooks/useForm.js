@@ -32,7 +32,8 @@ export const useForm =(initialForm, validacionForm) => {
         e.preventDefault()
         handleChange(e)
         setError(validacionForm(form))
-
+        setResponse(true)
+        
         if(Object.keys(error).length === 0){
             setLoading(true)
             const newOrder = {
@@ -66,7 +67,6 @@ export const useForm =(initialForm, validacionForm) => {
                 batch.commit()
                 setOrderId(response.id)
                 setLoading(false)
-                setResponse(true)
                 enviar({
                     type: 'vaciarCarrito',
                 })
