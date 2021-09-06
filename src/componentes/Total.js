@@ -2,8 +2,7 @@ import React from 'react'
 import './css/total.css'
 import CurrencyFormat from 'react-currency-format'
 import { useStateValue } from '../context/StateProvider';
-import { carritoTotal } from '../context/Reducer';
-import {quantityTotal} from '../context/Reducer' 
+import {quantityTotal, carritoTotal} from '../context/Reducer' 
 
 function Total() {
     const [{carrito}] = useStateValue()
@@ -25,7 +24,6 @@ function Total() {
                 thousandSeparator={true}
                 prefix={"$"}
             />
-            <button> Comprar </button>
         </div>
     )
 }

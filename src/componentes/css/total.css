@@ -3,7 +3,6 @@
     flex-direction: column;
     justify-content: space-between;
     width: 70%;
-    height: 100px;
     padding: 20px;
     background-color: white;
     box-shadow: 1px 1px 5px white;
@@ -12,20 +11,8 @@
     text-align: center;
 }
 
-.total > button {
-    background: #000000;
-    border-radius: 2px;
-    width: 30%;
-    height: 30px;
-    border: 1px solid;
-    margin-top: 10px;
-    color: white;
-    text-align: center;
-    margin: auto;
-}
-
 @media (max-width:888px){
-    .total > button{
-        width: 100%;
+    .total{
+        min-width: 70%;
     }
 }

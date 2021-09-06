@@ -12,7 +12,6 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
     const [,enviar] = useStateValue()
     const [nuevoStock, setNuevoStock] = useState(stock)
 
-
     const sumar= () =>{
         if(count < stock){
             setCount(count + 1)
@@ -34,6 +33,7 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
                     img: img,
                     precio: precio * count,
                     quantity: count,
+                    stock: stock
                 }
             
             })
@@ -43,7 +43,7 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
     useEffect(() => {
         setNuevoStock(stock - count)
         
-    },)
+    },[count])
 
 
     return (
@@ -57,30 +57,38 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
             </div>
 
             <div className='detail__info'>
-                <h2> {nombre}</h2>
+                <h2> {nombre?.toUpperCase()}</h2>
                 <p> {descripcion}</p>
-                <p> Stock disponible: <strong>{nuevoStock}</strong></p>
                 
+                {stock!==0?<>
+                <p> Stock disponible: <strong>{nuevoStock}</strong></p>
                 <p className='detail__precio'> 
                     <small>$</small>
                     <strong>{precio * count}</strong>
                 </p>
 
+                {!compra? 
+                <>
                 <div className='detail__botones'>
-                    {!compra? <button onClick={restar}> - </button>: null}
-                    {!compra? <span>{count}</span> : null}
-                    {!compra? <button onClick={sumar}> +</button>: null}
-                    
+                    <button onClick={restar}> - </button>
+                    <span>{count}</span>
+                    <button onClick={sumar}> +</button>
                 </div>
-                {!compra? <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>: 
+                <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>
+                </>
+                : <>
                 <div className='botoncompra'>
                     <Link to='/carrito'><button>Finalizar Compra</button></Link>
                     <Link to='/'><button>Seguir Comprando</button></Link>
-                </div> }
-                {compra && <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {nombre} </p>}
+                </div>
+                <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {nombre} </p>
+                </>}
+                </>:<p className='detail__sinstock'>SIN STOCK</p>}
+
             </div>
         </div>
     )
+
 }
 
 export default ItemDetail

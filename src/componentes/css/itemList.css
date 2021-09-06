@@ -13,24 +13,6 @@
     transition: all 300ms;
 }
 
-
-.producto:hover{
-   transform: scale(1.1);
-}
-
-@media (max-width: 480px){
-    .producto{
-        width: 60%;
-    }
-}
-
-@media (min-width: 481px) and (max-width:836px){
-    .producto{
-        width: 30%;
-        margin:20px;
-    }
-}
-
 .producto > img{
     width: 100%;
     height: 300px;
@@ -38,10 +20,16 @@
     margin-bottom: 15px;
 }
 
+
+
 .producto__info{
     height: 70px;
     margin-bottom: 15px;
     text-align: center;
+}
+
+.producto:hover{
+    transform: scale(1.1);
 }
 
 .producto__precio{
@@ -76,4 +64,43 @@
 
 .producto__buttom:hover{
     cursor: pointer;
+}
+
+@media (max-width: 420px){
+    .producto{
+        width: 60%;
+        margin: 10px;
+    }
+    .producto__info{
+        margin-bottom: -70px;
+    }
+    .producto > img{
+        margin-bottom: -30px;
+    }
+}
+
+@media (min-width: 420px) and (max-width:836px){
+    .producto{
+        width: 30%;
+        margin:20px;
+    }
+    .producto__info{
+        margin-bottom: -70px;
+    }
+    .producto > img{
+        margin-bottom: -30px;
+    }
+}
+
+@media (min-width: 836px) and (max-width:1240px){
+    .producto{
+        width: 20%;
+        margin:20px;
+    }
+    .producto__info{
+        margin-bottom: -70px;
+    }
+    .producto > img{
+        margin-bottom: -30px;
+    }
 }

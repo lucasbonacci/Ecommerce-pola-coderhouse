@@ -7,6 +7,7 @@ import './css/app.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
 import NotFound from './NotFound'
+import FormCheckOut from './FormCheckOut'
 
 
 const App = () =>{
@@ -17,6 +18,9 @@ const App = () =>{
                 <Switch>
                     <Route path='/carrito'>
                         <Cart/>
+                    </Route>
+                    <Route path='/checkout'>
+                        <FormCheckOut/>
                     </Route>
                     <Route path='/itemDetail/:catId'>
                         <ItemDetailContainer/>

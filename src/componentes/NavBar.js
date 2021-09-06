@@ -15,6 +15,7 @@ function NavBar (){
     }
 
     let cantidad = quantityTotal(carrito)
+    
     return (
         <div className="header">
             <Link to='/'>

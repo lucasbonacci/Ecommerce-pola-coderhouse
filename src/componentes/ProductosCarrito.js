@@ -4,10 +4,10 @@ import { useStateValue } from '../context/StateProvider'
 
 const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
     
-    const [,dispatch] = useStateValue()
+    const [,enviar] = useStateValue()
 
     const eliminarDelCarrito=()=>{
-        dispatch({
+        enviar({
             type:'eliminarDelCarrito',
             id:id,
             

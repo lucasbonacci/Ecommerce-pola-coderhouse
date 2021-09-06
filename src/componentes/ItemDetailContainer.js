@@ -32,17 +32,17 @@ const ItemDetailContainer = () => {
         
     },[catId])
 
-
     return (
         <div className='loader'>
-            {loading? <Loader/> :<ItemDetail
-            img={img}
-            precio={precio}
-            stock={stock}
-            key={id}
-            nombre={nombre}
-            descripcion={descripcion}
-            id={id}
+            {loading? <Loader/> :
+            <ItemDetail
+                img={img}
+                precio={precio}
+                stock={stock}
+                key={id}
+                nombre={nombre}
+                descripcion={descripcion}
+                id={id}
             />}
         </div>
 )

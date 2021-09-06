@@ -25,7 +25,7 @@ const reducer = (state, action) => {
                 newCarrito[index].precio+= action.item.precio
                 return{
                     ...state,
-                    carrito:[...newCarrito]
+                    carrito:[...newCarrito],
                 }
             } else{
                 return{
@@ -56,7 +56,6 @@ const reducer = (state, action) => {
                 ...state,
                 carrito: state.carrito = []
             }
-
         default:
             return state
     }

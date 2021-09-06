@@ -6,21 +6,35 @@ import { useStateValue } from '../context/StateProvider';
 import { Link } from "react-router-dom";
 
 function Cart() {
-    const [{carrito}, dispatch] = useStateValue()
+    const [{carrito}, enviar] = useStateValue()
 
     const vaciarCarrito = () =>{
-        dispatch({
+        enviar({
             type: 'vaciarCarrito',
         })
     }
 
+    let compraInvalida
+    let productoPasado
+
+    for(let i=0; i < carrito.length;i++){
+        if(carrito[i].quantity > carrito[i].stock){
+            compraInvalida = true
+            productoPasado = carrito[i].nombre
+        } 
+    }
+
     return (
         <div className='carrito'>
-            {carrito.length === 0? <div className='carrito__vacio'><p>Tu carrito esta vacio </p> <Link to='/'><button className="carrito__btn"> Ir a comprar </button></Link></div> : <></>}
-            {carrito.length ===0? <></>:
+            {carrito.length === 0? 
+            <div className='carrito__vacio'>
+                <p>Tu carrito esta vacio </p> 
+                <Link to='/'><button className="carrito__btn"> Ir a comprar </button></Link></div>
+            : 
+            <>
             <div className='carrito__izquierda'>
                 <div className='carrito__titulo'>
-                    <h2> tus compras </h2>
+                    <h2> Tus compras </h2>
                     {carrito.map(e =>{
                         return <ProductosCarrito
                             key={e.id}
@@ -33,11 +47,14 @@ function Cart() {
                     })}
                 <button onClick={vaciarCarrito} className="carrito__btn"> vaciar carrito</button>
                 </div>
-            </div>}
+            </div>
             
-            {carrito.length ===0? <></>: <div className='carrito__derecha'>
+            <div className='carrito__derecha'>
                 <Total/> 
-                </div>}
+                {!compraInvalida?<Link to='/checkout'><button disabled={compraInvalida} className='carrito__comprar'>COMPRAR</button></Link>:
+                <p className='carrito__stock'>No puedes pasar al checkout. Estas llevando mas cantidad del stock disponible en el producto <strong>{productoPasado.toUpperCase()}</strong> </p>}
+            </div>
+            </>}
         </div>
     )
 }
