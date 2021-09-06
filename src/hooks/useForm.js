@@ -9,9 +9,9 @@ import {quantityTotal,carritoTotal} from '../context/Reducer'
 export const useForm =(initialForm, validacionForm) => {
 
     const [{carrito}, enviar] = useStateValue()
-    const [orderId, setOrderId] = useState(null)
+    const [orderId, setOrderId] = useState('')
     const [form,setForm] = useState(initialForm)
-    const [error, setError] = useState({})
+    const [error, setError] = useState({error: ''})
     const [loading, setLoading] = useState(false)
     const [response, setResponse] = useState(false)
 
@@ -32,9 +32,10 @@ export const useForm =(initialForm, validacionForm) => {
         e.preventDefault()
         handleChange(e)
         setError(validacionForm(form))
-        setResponse(true)
+        
         
         if(Object.keys(error).length === 0){
+            setResponse(true)
             setLoading(true)
             const newOrder = {
                 buyer:{
@@ -73,6 +74,7 @@ export const useForm =(initialForm, validacionForm) => {
             })
             .catch((error)=> console.log(error))
         } else{
+            alert('Completa el formulario')
             return
         }
     }

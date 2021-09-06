@@ -21,7 +21,8 @@ const ItemDetailContainer = () => {
 
         currentItem.get().then(document =>{
             if(!document.exists){
-                alert('El producto no existe')
+                setProducto('noexiste')
+                setLoading(false)
             } else{
                 setProducto({
                     id: document.id, ...document.data()
@@ -33,7 +34,9 @@ const ItemDetailContainer = () => {
     },[catId])
 
     return (
-        <div className='loader'>
+        <>
+        {producto !== 'noexiste'? 
+        <div className='producto__existe'>
             {loading? <Loader/> :
             <ItemDetail
                 img={img}
@@ -44,7 +47,9 @@ const ItemDetailContainer = () => {
                 descripcion={descripcion}
                 id={id}
             />}
-        </div>
+        </div>:
+        <p className='producto__noexiste'>El producto no existe</p>}
+        </>
 )
 }
 

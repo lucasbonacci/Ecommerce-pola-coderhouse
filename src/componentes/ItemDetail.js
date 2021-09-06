@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 import './css/itemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useStateValue } from '../context/StateProvider';
@@ -15,12 +15,14 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
     const sumar= () =>{
         if(count < stock){
             setCount(count + 1)
+            setNuevoStock(stock - count)
         }
     }
 
     const restar = () =>{
         if(count > 1){
         setCount(count - 1)
+        setNuevoStock(stock - count)
         }
     }
 
@@ -40,10 +42,8 @@ const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
         setCompra(true)
 }
 
-    useEffect(() => {
-        setNuevoStock(stock - count)
         
-    },[count])
+
 
 
     return (

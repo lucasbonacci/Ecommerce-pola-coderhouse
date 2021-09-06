@@ -9,14 +9,14 @@ const initialForm ={
     lastname:'',
     email:'',
     phone:'',
-    emailcopia:'',
+    emailcopia:''
 }
 
 const validacionForm=(form) =>{
     let error ={}
     let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
     let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
-    let regexTelefono 
+    let regexTelefono =  /^\d*(\.\d+)?$/
 
     if(!form.name?.trim()){
         error.name = "'nombre' es requerido"
@@ -33,9 +33,11 @@ const validacionForm=(form) =>{
     } else if(!form.emailcopia?.trim()){
         error.emailcopia = "'verificacion email' es requerido"
     } else if (form.emailcopia !== form.email){
-        error.emailcopia = 'Tu email debe ser igual en ambos campos'
+        error.emailcopia = 'Tu email no coincide'
     } else if(!form.phone?.trim()){
         error.phone = "'telefono' es requerido"
+    } else if(!regexTelefono.test(form.phone.trim())){
+        error.phone = 'solo numeros'
     }
 
     return error
@@ -43,7 +45,7 @@ const validacionForm=(form) =>{
 
 const FormCheckOut = () =>{
     const {form,error,loading,response,handleChange,handleBlur,handleSubmit,orderId} = useForm(initialForm, validacionForm)
-
+    let disabledBoton = Object.keys(error).length ===0
     return(
         <>   
         {!response?
@@ -60,8 +62,7 @@ const FormCheckOut = () =>{
                         name='name'  
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.name} 
-                    />
+                        value={form.name}                     />
                     {error.name && <p>{error.name}</p>}
                     <label htmlFor='lastname'>Apellido:</label>
                     <input 
@@ -71,7 +72,7 @@ const FormCheckOut = () =>{
                         name='lastname' 
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.lastname} 
+                        value={form.lastname}
                     />
                     {error.lastname && <p>{error.lastname}</p>}
                     <label htmlFor='email'>email:</label>
@@ -82,8 +83,7 @@ const FormCheckOut = () =>{
                         name='email' 
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.email} 
-                    />
+                        value={form.email}                     />
                     {error.email && <p>{error.email}</p>}
                     <label htmlFor='confirmarEmail'>Confirmar Email:</label>
                     <input 
@@ -93,8 +93,7 @@ const FormCheckOut = () =>{
                         name='emailcopia' 
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.emailcopia} 
-                    />
+                        value={form.emailcopia}                     />
                     {error.emailcopia && <p>{error.emailcopia}</p>}
                     <label htmlFor='telefono'>Telefono:</label>
                     <input
@@ -107,7 +106,7 @@ const FormCheckOut = () =>{
                         value={form.phone} 
                     />
                     {error.phone && <p>{error.phone}</p>} 
-                    <button type='submit' className='formulario__button'> Finalizar compra</button>
+                    <button type='submit' className='formulario__button' disabled={!disabledBoton}> Finalizar compra</button>
                 </form>
                 
             </div>

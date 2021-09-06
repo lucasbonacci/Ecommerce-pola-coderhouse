@@ -37,6 +37,15 @@
     margin: 5px 0px;
 }
 
+.formulario label{
+    font-weight: 600;
+}
+
+.formulario p{
+    color:red;
+    text-align: center;
+}
+
 .order{
     display: flex;
     justify-content: center;
