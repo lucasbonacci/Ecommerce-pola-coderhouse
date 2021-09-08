@@ -8,6 +8,7 @@ import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
 import NotFound from './NotFound'
 import FormCheckOut from './FormCheckOut'
+import Login from './Login'
 
 
 const App = () =>{
@@ -31,12 +32,15 @@ const App = () =>{
                     <Route exact path='/'>
                         <ItemListContainer/>
                     </Route>
+                    <Route path='/login'>
+                        <Login/>
+                    </Route>
                     <Route path='*'>
                         <NotFound/>
                     </Route>
                 </Switch>
             <Footer/>
-    </main>
+            </main>
         </Router>)
 }
 

@@ -6,7 +6,8 @@ import { Link, useHistory } from "react-router-dom";
 import {useStateValue} from '../context/StateProvider'
 import {quantityTotal} from '../context/Reducer' 
 
-function NavBar (){
+const NavBar = () =>{
+
     const [{carrito}] = useStateValue()
 
     let history = useHistory()
@@ -39,7 +40,7 @@ function NavBar (){
             <div className="header__nav">
                 <div className="header__option">
                     <span className='header__optionOne'>Hola Extraño</span>
-                    <span className='header__optionTwo'>Ingresar</span>
+                    <Link to='/login'><span className='header__optionTwo'>Ingresar</span></Link>
                 </div>
 
                 

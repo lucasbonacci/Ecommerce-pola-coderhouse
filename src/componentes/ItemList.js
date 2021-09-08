@@ -3,7 +3,7 @@ import './css/itemList.css'
 import { Link } from "react-router-dom";
 
 
-function ItemList({id,nombre,img}) {
+const ItemList = ({id,nombre,img}) => {
 
     return (
         <div className='producto'>

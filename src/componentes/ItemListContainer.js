@@ -6,7 +6,7 @@ import { useParams } from 'react-router-dom'
 import Loader from './Loader'
 import { getFirestore } from '../firebase/firebase-data'
 
-function ItemListContainer() {
+const ItemListContainer =() => {
 
     const [productos, setProductos] = useState([])
     const [loading, setLoading] = useState(false)

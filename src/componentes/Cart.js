@@ -5,8 +5,10 @@ import Total from './Total'
 import { useStateValue } from '../context/StateProvider';
 import { Link } from "react-router-dom";
 
-function Cart() {
+
+const Cart = () => {
     const [{carrito}, enviar] = useStateValue()
+
 
     const vaciarCarrito = () =>{
         enviar({

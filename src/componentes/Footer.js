@@ -3,7 +3,7 @@ import './css/footer.css'
 import GitHubIcon from '@material-ui/icons/GitHub'
 import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
-function Footer() {
+const Footer = () => {
     return (
         <div className='footer'>
             <p> Proyecto final para el curso de react de CoderHouse</p>

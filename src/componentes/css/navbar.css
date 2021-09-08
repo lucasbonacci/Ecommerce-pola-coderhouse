@@ -82,6 +82,20 @@
     color: white;
 }
 
+.header__optionCart > a:hover{
+    color: rgba(135, 173, 245, 0.808);
+}
+
+.header__option > a{
+    text-decoration: none;
+    list-style: none;
+    color: white;
+}
+
+.header__option > a:hover{
+    color: rgba(135, 173, 245, 0.808);
+}
+
 
 
 .header__cartCount{

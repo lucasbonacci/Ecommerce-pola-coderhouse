@@ -4,7 +4,7 @@ import CurrencyFormat from 'react-currency-format'
 import { useStateValue } from '../context/StateProvider';
 import {quantityTotal, carritoTotal} from '../context/Reducer' 
 
-function Total() {
+const Total = () => {
     const [{carrito}] = useStateValue()
 
     let cantidad = quantityTotal(carrito)

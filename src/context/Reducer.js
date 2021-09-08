@@ -1,7 +1,18 @@
 
-export const initialState = {
-    carrito: [],
+
+let localItem = []
+
+const storageItem = () => {
+    if(localStorage.getItem('carrito')){
+        return localItem = JSON.parse(localStorage.getItem('carrito'))
+    }
 }
+storageItem()
+
+export const initialState =  {
+    carrito: [...localItem],
+}
+
 
 
 export const carritoTotal = (carrito) => 
@@ -12,6 +23,7 @@ export const quantityTotal = (carrito) =>
 
     
 const reducer = (state, action) => {
+
     switch(action.type){
         case 'agregarAlCarrito':{
             let itemInCart = state.carrito.some(item => item.id === action.item.id)
@@ -23,14 +35,17 @@ const reducer = (state, action) => {
                 newCarrito[index].quantity += action.item.quantity
 
                 newCarrito[index].precio+= action.item.precio
+                localStorage.setItem('carrito', JSON.stringify(newCarrito))
                 return{
                     ...state,
                     carrito:[...newCarrito],
                 }
             } else{
+                let newCarrito = [...state.carrito, action.item]
+                localStorage.setItem('carrito', JSON.stringify(newCarrito))
                 return{
                     ...state,
-                    carrito: [...state.carrito, action.item]
+                    carrito: [...newCarrito]
                 }
             }
         }
@@ -38,28 +53,30 @@ const reducer = (state, action) => {
         case 'eliminarDelCarrito':
             const index = state.carrito.findIndex(
                 (carritoItem) => carritoItem.id === action.id)
-            let nuevoCarrito = [...state.carrito]
+            let newCarrito = [...state.carrito]
             
             if (index >= 0){
-                nuevoCarrito.splice(index,1)
-            } else{
-                console.log(`error ${action.id}`)
-            }
+                newCarrito.splice(index,1)
+                localStorage.setItem('carrito', JSON.stringify(newCarrito))
+            } 
 
             return{
                 ...state,
-                carrito: nuevoCarrito
+                carrito: [...newCarrito]
             }
 
         case 'vaciarCarrito':
+            localStorage.clear()
             return{
                 ...state,
-                carrito: state.carrito = []
+                carrito: []
             }
         default:
             return state
     }
 
 }
+
+
 
 export default reducer
