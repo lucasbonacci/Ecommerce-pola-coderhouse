@@ -13,10 +13,10 @@ const initialForm ={
 }
 
 const validacionForm=(form) =>{
-    let error ={}
-    let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
-    let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
-    let regexTelefono =  /^\d*(\.\d+)?$/
+    const error ={}
+    const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
+    const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
+    const regexTelefono =  /^\d*(\.\d+)?$/
 
     if(!form.name?.trim()){
         error.name = "'nombre' es requerido"

@@ -1,5 +1,7 @@
 import React from 'react'
 import { useForm } from "../hooks/useForm";
+import { useAuth } from '../context/AuthContext'
+import { useHistory } from "react-router";
 
 const initialForm ={
     name:'',
@@ -10,10 +12,10 @@ const initialForm ={
 
 
 const validacionForm=(form) =>{
-    let error ={}
-    let regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
-    let regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
-    let regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
+    const error ={}
+    const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
+    const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
+    const regexPassword = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[$@$!%*?&])([A-Za-z\d$@$!%*?&]|[^ ]){8,15}$/;
 
     if(!form.name?.trim()){
         error.name = "'nombre' es requerido"
@@ -26,7 +28,7 @@ const validacionForm=(form) =>{
     } else if(!form.password?.trim()){
         error.password = "'contraseña' es requerido"
     } else if(!regexPassword.test(form.password.trim())){
-        error.password = "Debe contener entre 8 y 15 caracteres, al menos una letra mayuscula, al menos una letra miniscula, al menos un digito, no espacios en blanco y al menos un caracter especial"
+        error.password = "Debe contener entre 8 y 15 caracteres, al menos una letra mayuscula, al menos una letra miniscula, al menos un digito, no espacios en blanco y al menos un caracter especial como *$!@"
     }else if(!form.confirmpassword?.trim()){
         error.confirmpassword = "'confirmar contraseña' es requerido"
     } else if (form.confirmpassword !== form.password){
@@ -39,6 +41,11 @@ const validacionForm=(form) =>{
 const Register = () => {
     const {form,error,handleChange,handleBlur,handleSubmitRegister} = useForm(initialForm, validacionForm)
     const disabledBoton = Object.keys(error).length ===0
+    const authe = useAuth()
+    const history = useHistory()
+
+    if(authe.user) history.push('/')
+
     return (
         <div className='login'>
             <div className='login__cont'>
@@ -85,6 +92,7 @@ const Register = () => {
                         />
                     {error.confirmpassword && <p>{error.confirmpassword}</p>}
                     <button className='login__btn' type='submit' disabled={!disabledBoton}>Crear</button>
+                    {error?<p>{error.code}</p>: <></>}
                 </form>
             </div>
         </div>

@@ -1,56 +1,63 @@
-import React,{useState} from 'react'
+import React from 'react'
 import './css/login.css'
-import { useHistory } from 'react-router'
-import { useAuth } from '../context/AuthContext'
 import { Link } from 'react-router-dom'
+import { useForm } from "../hooks/useForm";
+import { useAuth } from '../context/AuthContext'
+import { useHistory } from "react-router";
+
+const initialForm ={
+    email:'',
+    password:''
+}
+
+const validacionForm=(form) =>{
+    const error ={}
+    const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
+
+    if(!form.email?.trim()){
+        error.email = "'email' es requerido"
+    } else if(!regexEmail.test(form.email.trim())){
+        error.email = "Tu email es incorrecto"
+    } else if(!form.password?.trim()){
+        error.password = "'contraseña' es requerido"
+    } 
+    return error
+}
+
+
 
 
 const Login = () => {
-    const history = useHistory()
-    const [creeds, setCreeds] = useState({
-        email: '',
-        password: ''
-    }) 
-
-    const [loading, setLoading] = useState(false)
-    const [error, setError] = useState(null)
+    const {form,error,handleChange,handleBlur,handleSubmitLogin} = useForm(initialForm, validacionForm)
     const authe = useAuth()
+    const history = useHistory()
 
-    const onChange = (e) =>{
-        const {name,value} = e.target
-        setCreeds({
-            ...creeds,
-            [name]: value
-        })
-    }
+    if(authe.user) history.push('/')
 
-    const handleSubmit = async (e) =>{
-        console.log(authe)
-        e.preventDefault()
-        setLoading(true)
-        try{
-            await authe.signIn(creeds.email,creeds.password)
-            history.push('/')
-        } catch (e){
-            console.log(e)
-            setError(e)
-            setLoading(false)
-            console.log(error)
-        }
-    }
 
-    
     return (
         <div className='login'>
             <div className='login__cont'>
                 <h2> Logeate</h2>
-                <form onSubmit={handleSubmit}>
+                <form onSubmit={handleSubmitLogin}>
                     <label>Email</label>
-                    <input type='text' value={creeds.email} name='email' onChange={onChange}/>
+                    <input 
+                        type='text' 
+                        value={form.email} 
+                        name='email' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}/>
+                    {error.email && <p>{error.email}</p>}
                     <label>Contraseña</label>
-                    <input type='password' value={creeds.password} name='password' onChange={onChange}/>
+                    <input 
+                        type='password' 
+                        value={form.password} 
+                        name='password' 
+                        onBlur={handleBlur}
+                        onChange={handleChange}/>
 
-                    <button className='login__btn' type='submit'> Iniciar Sesion</button>
+                    <button className='login__btn' type='submit' > Iniciar Sesion</button>
+                    {error? <p>{error.code}</p>:<></>}
                 </form>
                     <Link to='/register'><button className='login__btn' type='submit' > Crear cuenta</button></Link>
             </div>

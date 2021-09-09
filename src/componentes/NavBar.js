@@ -11,7 +11,6 @@ const NavBar = () =>{
 
     const [{carrito}] = useStateValue()
     const authe = useAuth()
-    console.log(authe.user)
 
     let history = useHistory()
     const onChange = (e) =>{

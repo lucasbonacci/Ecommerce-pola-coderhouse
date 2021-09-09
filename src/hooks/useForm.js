@@ -82,14 +82,23 @@ export const useForm =(initialForm, validacionForm) => {
         }
     }
 
+    const handleSubmitLogin = async (e) =>{
+        e.preventDefault()
+        try{
+            await authe.signIn(form.email,form.password)
+            history.push('/')
+        } catch (e){
+            setError(e)
+        }
+    }
+
     const handleSubmitRegister = async (e)=>{
         e.preventDefault()
-        console.log('funca')
         try{
             await authe.register(form.email, form.password)
             history.push('/')
         } catch(e){
-            console.log(e)
+            setError(e)
         }
         
     }
@@ -103,7 +112,8 @@ export const useForm =(initialForm, validacionForm) => {
         handleBlur,
         handleSubmit,
         orderId,
-        handleSubmitRegister
+        handleSubmitRegister,
+        handleSubmitLogin
     }
 
 }
