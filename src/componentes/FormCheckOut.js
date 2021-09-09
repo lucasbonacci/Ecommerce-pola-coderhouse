@@ -45,7 +45,7 @@ const validacionForm=(form) =>{
 
 const FormCheckOut = () =>{
     const {form,error,loading,response,handleChange,handleBlur,handleSubmit,orderId} = useForm(initialForm, validacionForm)
-    let disabledBoton = Object.keys(error).length ===0
+    const disabledBoton = Object.keys(error).length ===0
     return(
         <>   
         {!response?

@@ -5,10 +5,13 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";
 import {useStateValue} from '../context/StateProvider'
 import {quantityTotal} from '../context/Reducer' 
+import { useAuth } from '../context/AuthContext'
 
 const NavBar = () =>{
 
     const [{carrito}] = useStateValue()
+    const authe = useAuth()
+    console.log(authe.user)
 
     let history = useHistory()
     const onChange = (e) =>{
@@ -39,8 +42,8 @@ const NavBar = () =>{
 
             <div className="header__nav">
                 <div className="header__option">
-                    <span className='header__optionOne'>Hola Extraño</span>
-                    <Link to='/login'><span className='header__optionTwo'>Ingresar</span></Link>
+                    <span className='header__optionOne'>Hola {authe.user? `${authe.user.email}`: 'invitado'}</span>
+                    {authe.user?<button className='header__button' onClick={async () => await authe.signOut()}>Desconectar</button> :<Link to='/login'><span className='header__optionTwo'>ingresar</span></Link>}
                 </div>
 
                 

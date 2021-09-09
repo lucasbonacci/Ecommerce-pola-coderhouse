@@ -3,7 +3,8 @@ import {useStateValue} from '../context/StateProvider'
 import { getFirestore } from '../firebase/firebase-data'
 import { Timestamp } from 'firebase/firestore'
 import {quantityTotal,carritoTotal} from '../context/Reducer' 
-
+import { useHistory } from "react-router";
+import { useAuth } from '../context/AuthContext'
 
 
 export const useForm =(initialForm, validacionForm) => {
@@ -14,6 +15,8 @@ export const useForm =(initialForm, validacionForm) => {
     const [error, setError] = useState({error: ''})
     const [loading, setLoading] = useState(false)
     const [response, setResponse] = useState(false)
+    const history = useHistory()
+    const authe = useAuth()
 
     const handleChange = (e) =>{
         const {name,value} = e.target
@@ -79,6 +82,18 @@ export const useForm =(initialForm, validacionForm) => {
         }
     }
 
+    const handleSubmitRegister = async (e)=>{
+        e.preventDefault()
+        console.log('funca')
+        try{
+            await authe.register(form.email, form.password)
+            history.push('/')
+        } catch(e){
+            console.log(e)
+        }
+        
+    }
+
     return {
         form,
         error,
@@ -88,6 +103,7 @@ export const useForm =(initialForm, validacionForm) => {
         handleBlur,
         handleSubmit,
         orderId,
+        handleSubmitRegister
     }
 
 }

@@ -1,48 +1,58 @@
 import React,{useState} from 'react'
 import './css/login.css'
-import { getFireauth } from '../firebase/firebase-data'
 import { useHistory } from 'react-router'
+import { useAuth } from '../context/AuthContext'
+import { Link } from 'react-router-dom'
+
 
 const Login = () => {
     const history = useHistory()
-    const [email, setEmail] = useState('')
-    const [password, setPassword]= useState('')
-    const auth = getFireauth ()
+    const [creeds, setCreeds] = useState({
+        email: '',
+        password: ''
+    }) 
 
-    const singIn = e =>{
+    const [loading, setLoading] = useState(false)
+    const [error, setError] = useState(null)
+    const authe = useAuth()
+
+    const onChange = (e) =>{
+        const {name,value} = e.target
+        setCreeds({
+            ...creeds,
+            [name]: value
+        })
+    }
+
+    const handleSubmit = async (e) =>{
+        console.log(authe)
         e.preventDefault()
-        auth.signInWithEmailAndPassword(email,password)
-        .then(auth =>{
+        setLoading(true)
+        try{
+            await authe.signIn(creeds.email,creeds.password)
             history.push('/')
-        })
-        .catch(error => console.log(error))
+        } catch (e){
+            console.log(e)
+            setError(e)
+            setLoading(false)
+            console.log(error)
+        }
     }
 
-    const register = e  =>{
-        e.preventDefault()
-        
-        auth.createUserWithEmailAndPassword(email, password)
-        .then(auth =>{
-            console.log(auth)
-            if (auth){ 
-                history.push('/') 
-            }
-        })
-        .catch(error => alert(error))
-    }
+    
     return (
         <div className='login'>
             <div className='login__cont'>
                 <h2> Logeate</h2>
-                <form>
+                <form onSubmit={handleSubmit}>
                     <label>Email</label>
-                    <input type='text' value={email} onChange={e => setEmail(e.target.value)}/>
+                    <input type='text' value={creeds.email} name='email' onChange={onChange}/>
                     <label>Contraseña</label>
-                    <input type='password' value={password} onChange={e=>setPassword(e.target.value)}/>
+                    <input type='password' value={creeds.password} name='password' onChange={onChange}/>
 
-                    <button className='login__btn' type='submit' onClick={singIn}> Iniciar Sesion</button>
+                    <button className='login__btn' type='submit'> Iniciar Sesion</button>
                 </form>
-                    <button className='login__btn' type='submit' onClick={register}> Crear cuenta</button>
+                    <Link to='/register'><button className='login__btn' type='submit' > Crear cuenta</button></Link>
             </div>
         </div>
     )
