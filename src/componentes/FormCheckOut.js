@@ -4,13 +4,16 @@ import Total from "./Total";
 import Loader from "./Loader";
 import { Link } from "react-router-dom";
 
+
 const initialForm ={
     name:'',
     lastname:'',
     email:'',
     phone:'',
-    emailcopia:''
-}
+    emailcopia:'',
+    direccion:''
+} 
+
 
 const validacionForm=(form) =>{
     const error ={}
@@ -38,6 +41,8 @@ const validacionForm=(form) =>{
         error.phone = "'telefono' es requerido"
     } else if(!regexTelefono.test(form.phone.trim())){
         error.phone = 'solo numeros'
+    } else if(!form.direccion?.trim()){
+        error.direccion = 'Provincia y ciudad es requerido'
     }
 
     return error
@@ -46,6 +51,7 @@ const validacionForm=(form) =>{
 const FormCheckOut = () =>{
     const {form,error,loading,response,handleChange,handleBlur,handleSubmit,orderId} = useForm(initialForm, validacionForm)
     const disabledBoton = Object.keys(error).length ===0
+
     return(
         <>   
         {!response?
@@ -62,7 +68,8 @@ const FormCheckOut = () =>{
                         name='name'  
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.name}                     />
+                        value={form.name}                     
+                        />
                     {error.name && <p>{error.name}</p>}
                     <label htmlFor='lastname'>Apellido:</label>
                     <input 
@@ -83,7 +90,8 @@ const FormCheckOut = () =>{
                         name='email' 
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.email}                     />
+                        value={form.email}                    
+                        />
                     {error.email && <p>{error.email}</p>}
                     <label htmlFor='confirmarEmail'>Confirmar Email:</label>
                     <input 
@@ -93,7 +101,8 @@ const FormCheckOut = () =>{
                         name='emailcopia' 
                         onBlur={handleBlur} 
                         onChange={handleChange} 
-                        value={form.emailcopia}                     />
+                        value={form.emailcopia}                     
+                        />
                     {error.emailcopia && <p>{error.emailcopia}</p>}
                     <label htmlFor='telefono'>Telefono:</label>
                     <input
@@ -106,6 +115,17 @@ const FormCheckOut = () =>{
                         value={form.phone} 
                     />
                     {error.phone && <p>{error.phone}</p>} 
+                    <label htmlFor='direccion'>Direccion</label>
+                    <input
+                        className='formulario__input' 
+                        id='direccion'
+                        type='text' 
+                        name='direccion' 
+                        onBlur={handleBlur} 
+                        onChange={handleChange} 
+                        value={form.direccion} 
+                    />
+                    {error.direccion && <p>{error.direccion}</p>} 
                     <button type='submit' className='formulario__button' disabled={!disabledBoton}> Finalizar compra</button>
                 </form>
                 

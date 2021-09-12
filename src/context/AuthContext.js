@@ -9,6 +9,8 @@ const useAuth = () =>{
 
 const auth = getFireauth()
 
+
+
 const UserProvider = ({children}) =>{
     const [user, setUser] = useState(null)
 
@@ -47,16 +49,24 @@ const UserProvider = ({children}) =>{
         })
     }
 
-    const register = (email, password) =>{
+    const register = (email, password,name) =>{
         return new Promise(async (resolve, reject) =>{
             try{
-                const newUser = await auth.createUserWithEmailAndPassword(email, password)
+                const newUser = await auth.createUserWithEmailAndPassword(email, password).then((res) =>{
+                    res.user.updateProfile({
+                        displayName: name
+                    })
+                })
+                console.log(newUser)
                 resolve(newUser)
+
             }catch(e){
                 reject(e)
             }
         })
+    
     }
+
 
 
     return <UserContext.Provider value={{user, signIn, signOut, register}}>

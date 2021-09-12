@@ -28,7 +28,7 @@ const validacionForm=(form) =>{
     } else if(!form.password?.trim()){
         error.password = "'contraseña' es requerido"
     } else if(!regexPassword.test(form.password.trim())){
-        error.password = "Debe contener entre 8 y 15 caracteres, al menos una letra mayuscula, al menos una letra miniscula, al menos un digito, no espacios en blanco y al menos un caracter especial como *$!@"
+        error.password = "Debe contener entre 8 y 15 caracteres, al menos una letra mayuscula, al menos una letra miniscula, al menos un digito, no contener espacios en blanco y al menos un caracter especial como *$!@"
     }else if(!form.confirmpassword?.trim()){
         error.confirmpassword = "'confirmar contraseña' es requerido"
     } else if (form.confirmpassword !== form.password){
@@ -51,7 +51,7 @@ const Register = () => {
             <div className='login__cont'>
                 <h2>Registrate</h2>
                 <form onSubmit={handleSubmitRegister}>
-                    <label htmlFor='name'>Nombre</label>
+                    <label htmlFor='name'>Nombre y apellido</label>
                     <input 
                         id='name'
                         type='text' 

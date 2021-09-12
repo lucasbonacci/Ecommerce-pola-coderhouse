@@ -7,10 +7,9 @@ import './css/app.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
 import NotFound from './NotFound'
-import FormCheckOut from './FormCheckOut'
 import Login from './Login'
 import Register from './Register'
-
+import CheckOut from './CheckOut'
 
 const App = () =>{
     return (
@@ -18,30 +17,14 @@ const App = () =>{
             <main>
             <NavBar/>
                 <Switch>
-                    <Route path='/carrito'>
-                        <Cart/>
-                    </Route>
-                    <Route path='/checkout'>
-                        <FormCheckOut/>
-                    </Route>
-                    <Route path='/itemDetail/:catId'>
-                        <ItemDetailContainer/>
-                    </Route>
-                    <Route path='/category/:categoriaId'>
-                        <ItemListContainer/>
-                    </Route>
-                    <Route exact path='/'>
-                        <ItemListContainer/>
-                    </Route>
-                    <Route path='/login'>
-                        <Login/>
-                    </Route>
-                    <Route path='/register'>
-                        <Register/>    
-                    </Route>
-                    <Route path='*'>
-                        <NotFound/>
-                    </Route>
+                    <Route path='/carrito' component={Cart}/>
+                    <Route path='/checkout' component={CheckOut}/>
+                    <Route path='/itemDetail/:catId' component={ItemDetailContainer}/>
+                    <Route path='/category/:categoriaId' component={ItemListContainer}/>
+                    <Route exact path='/' component={ItemListContainer}/>
+                    <Route path='/login' component={Login}/>
+                    <Route path='/register' component={Register}/>
+                    <Route path='*' component={NotFound}/>
                 </Switch>
             <Footer/>
             </main>

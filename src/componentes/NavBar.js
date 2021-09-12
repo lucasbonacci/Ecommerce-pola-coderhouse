@@ -16,9 +16,8 @@ const NavBar = () =>{
     const onChange = (e) =>{
         history.push(`/${e.target.value}`)
     }
-
+    console.log(authe)
     let cantidad = quantityTotal(carrito)
-    
     return (
         <div className="header">
             <Link to='/'>
@@ -41,7 +40,7 @@ const NavBar = () =>{
 
             <div className="header__nav">
                 <div className="header__option">
-                    <span className='header__optionOne'>Hola {authe.user? `${authe.user.email}`: 'invitado'}</span>
+                    <span className='header__optionOne'>Hola {authe.user? `${authe.user.displayName}`: 'invitado'}</span>
                     {authe.user?<button className='header__button' onClick={async () => await authe.signOut()}>Desconectar</button> :<Link to='/login'><span className='header__optionTwo'>ingresar</span></Link>}
                 </div>
 

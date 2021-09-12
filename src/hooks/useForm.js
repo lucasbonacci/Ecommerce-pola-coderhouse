@@ -82,6 +82,59 @@ export const useForm =(initialForm, validacionForm) => {
         }
     }
 
+    const handleSubmitAuth = (e) =>{
+        e.preventDefault()
+        handleChange(e)
+        setError(validacionForm(form))
+        
+        
+        if(Object.keys(error).length === 0){
+            setResponse(true)
+            setLoading(true)
+            const newOrder = {
+                buyer:{
+                    ...form,
+                    nombre: authe.user.displayName,
+                    email: authe.user.email,
+                    date: Timestamp.fromDate(new Date())
+                },
+                items: carrito.map(({id,precio,nombre, quantity}) =>({
+                    id,
+                    precio,
+                    nombre,
+                    quantity,
+                })),
+                total: carritoTotal(carrito),
+                quantityTotal: quantityTotal(carrito)
+            }
+        
+            const db = getFirestore()
+            const orders = db.collection('orders')
+            const batch = db.batch()
+        
+            orders.add(newOrder).then((response) =>{
+                console.log(response)
+                
+                carrito.forEach((item) => {
+                    const docRef = db.collection('productos').doc(item.id)
+                    batch.update(docRef, {stock: item.stock - item.quantity})
+                    console.log(item)
+                });
+                
+                batch.commit()
+                setOrderId(response.id)
+                setLoading(false)
+                enviar({
+                    type: 'vaciarCarrito',
+                })
+            })
+            .catch((error)=> console.log(error))
+        } else{
+            alert('Completa el formulario')
+            return
+        }
+    }
+
     const handleSubmitLogin = async (e) =>{
         e.preventDefault()
         try{
@@ -95,8 +148,9 @@ export const useForm =(initialForm, validacionForm) => {
     const handleSubmitRegister = async (e)=>{
         e.preventDefault()
         try{
-            await authe.register(form.email, form.password)
+            await authe.register(form.email, form.password,form.name)
             history.push('/')
+            window.location.reload()
         } catch(e){
             setError(e)
         }
@@ -113,7 +167,8 @@ export const useForm =(initialForm, validacionForm) => {
         handleSubmit,
         orderId,
         handleSubmitRegister,
-        handleSubmitLogin
+        handleSubmitLogin,
+        handleSubmitAuth
     }
 
 }

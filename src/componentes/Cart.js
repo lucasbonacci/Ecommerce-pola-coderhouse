@@ -4,11 +4,11 @@ import ProductosCarrito from './ProductosCarrito'
 import Total from './Total'
 import { useStateValue } from '../context/StateProvider';
 import { Link } from "react-router-dom";
-
+import { useAuth } from '../context/AuthContext'
 
 const Cart = () => {
     const [{carrito}, enviar] = useStateValue()
-
+    const authe = useAuth()
 
     const vaciarCarrito = () =>{
         enviar({
@@ -30,13 +30,13 @@ const Cart = () => {
         <div className='carrito'>
             {carrito.length === 0? 
             <div className='carrito__vacio'>
-                <p>Tu carrito esta vacio </p> 
+                <p>Tu carrito esta vacio </p>
                 <Link to='/'><button className="carrito__btn"> Ir a comprar </button></Link></div>
             : 
             <>
             <div className='carrito__izquierda'>
                 <div className='carrito__titulo'>
-                    <h2> Tus compras </h2>
+                    {authe.user? <h2>Las compra de {authe.user.email}  </h2> :<h2> Tus compras </h2>}
                     {carrito.map(e =>{
                         return <ProductosCarrito
                             key={e.id}
