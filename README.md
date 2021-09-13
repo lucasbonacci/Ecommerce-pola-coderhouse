@@ -1,4 +1,12 @@
+<<<<<<< HEAD
 #Ecommerce Pola
+=======
+![gif github](https://user-images.githubusercontent.com/79149474/133035749-d7ceb6f7-5b86-41eb-bdbb-7fa656cc8f8a.gif)
+
+
+
+# Getting Started with Create React App
+>>>>>>> d2005434a08fde310bb726320fd351874efbaafe
 
 This is a functional ecommerce. is the final project of the course react js in coderhouse. 
 
