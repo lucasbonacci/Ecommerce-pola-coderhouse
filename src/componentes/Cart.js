@@ -22,7 +22,7 @@ const Cart = () => {
     for(let i=0; i < cart.length;i++){
         if(cart[i].quantity > cart[i].stock){
             invalidPurchase = true
-            overboughtProduct = cart[i].nombre
+            overboughtProduct = cart[i].name
         } 
     }
 

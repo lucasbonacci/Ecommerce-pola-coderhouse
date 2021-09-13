@@ -57,7 +57,7 @@ const reducer = (state, action) => {
             
             if (index >= 0){
                 newCart.splice(index,1)
-                localStorage.setItem('carrito', JSON.stringify(newCart))
+                localStorage.setItem('cart', JSON.stringify(newCart))
             } 
 
             return{
