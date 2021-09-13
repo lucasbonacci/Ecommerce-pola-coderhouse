@@ -6,9 +6,9 @@ import FormCheckOutAuth from './FormCheckOutAuth'
 const CheckOut = () => {
     const authe = useAuth()
     return (
-        <>
+        <main>
             {authe.user? <FormCheckOutAuth/>: <FormCheckOut/> }
-        </>
+        </main>
     )
 }
 

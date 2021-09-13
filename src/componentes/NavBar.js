@@ -12,7 +12,7 @@ const NavBar = () =>{
     const [{cart}] = useStateValue()
     const authe = useAuth()
 
-    let history = useHistory()
+    const history = useHistory()
     
     const onChange = (e) =>{
         history.push(`/${e.target.value}`)
@@ -20,7 +20,7 @@ const NavBar = () =>{
     let quantity = quantityTotal(cart)
     
     return (
-        <div className="header">
+        <header className="header">
             <Link to='/'>
                 <img className="header__logo"
                 src={logopola}
@@ -53,7 +53,7 @@ const NavBar = () =>{
                     <span className='header__cartCount' >{quantity ===0? <></>: quantity }</span>
                 </div>
             </div>
-        </div>
+        </header>
     )
 }
 

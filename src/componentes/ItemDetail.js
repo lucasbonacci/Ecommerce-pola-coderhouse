@@ -41,7 +41,7 @@ const ItemDetail = ({name, price, img, stock, description, id}) => {
 
     useEffect(() =>{
         setNewStock(stock-count)
-    },)
+    },[stock, count])
 
 
 

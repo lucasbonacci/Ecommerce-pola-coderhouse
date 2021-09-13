@@ -27,7 +27,7 @@ const Cart = () => {
     }
 
     return (
-        <div className='cart'>
+        <main className='cart'>
             {cart.length === 0? 
             <div className='empty__cart'>
                 <p>Tu carrito esta vacio </p>
@@ -57,7 +57,7 @@ const Cart = () => {
                 <p className='cart__stock'>No puedes pasar al checkout. Estas llevando mas cantidad del stock disponible en el producto <strong>{overboughtProduct?.toUpperCase()}</strong> </p>}
             </div>
             </>}
-        </div>
+        </main>
     )
 }
 

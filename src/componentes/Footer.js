@@ -5,11 +5,11 @@ import LinkedInIcon from '@material-ui/icons/LinkedIn';
 
 const Footer = () => {
     return (
-        <div className='footer'>
+        <footer className='footer'>
             <p> Proyecto final para el curso de react de CoderHouse</p>
             <a href='https://www.linkedin.com/in/lucasbonacci/' target='_blank' rel="noreferrer"><LinkedInIcon/> Lucas Bonacci</a>
             <a href='https://github.com/lucasbonacci/Desafio1Coder' target='_blank' rel="noreferrer"><GitHubIcon/> Repo en github </a>
-        </div>
+        </footer>
     )
 }
 

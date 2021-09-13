@@ -36,7 +36,7 @@ const Login = () => {
 
 
     return (
-        <div className='login'>
+        <main className='login'>
             <div className='login__cont'>
                 <h2> Logeate</h2>
                 <form onSubmit={handleSubmitLogin}>
@@ -61,7 +61,7 @@ const Login = () => {
                 </form>
                     <Link to='/register'><button className='login__btn' type='submit' > Crear cuenta</button></Link>
             </div>
-        </div>
+        </main>
     )
 }
 

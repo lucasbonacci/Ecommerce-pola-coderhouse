@@ -34,7 +34,7 @@ const ItemDetailContainer = () => {
     },[catId])
 
     return (
-        <>
+        <main>
         {product !== 'notexists'? 
         <div className='product__exists'>
             {loading? <Loader/> :
@@ -49,7 +49,7 @@ const ItemDetailContainer = () => {
             />}
         </div>:
         <p className='product__notexists'>El producto no existe</p>}
-        </>
+        </main>
 )
 }
 

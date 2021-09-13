@@ -46,7 +46,7 @@ const ItemListContainer =() => {
     },[categoryId])
 
     return (
-        <div className='home'>
+        <main className='home'>
             
             <div className='home__container'>
                 <img
@@ -69,7 +69,7 @@ const ItemListContainer =() => {
 
                 </div>
             </div>
-        </div>
+        </main>
     )
 }
 

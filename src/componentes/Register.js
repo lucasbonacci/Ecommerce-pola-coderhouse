@@ -47,7 +47,7 @@ const Register = () => {
     if(authe.user) history.push('/')
 
     return (
-        <div className='login'>
+        <main className='login'>
             <div className='login__cont'>
                 <h2>Registrate</h2>
                 <form onSubmit={handleSubmitRegister}>
@@ -95,7 +95,7 @@ const Register = () => {
                     {error?<p>{error.code}</p>: <></>}
                 </form>
             </div>
-        </div>
+        </main>
     )
 }
 

@@ -14,7 +14,6 @@ import CheckOut from './CheckOut'
 const App = () =>{
     return (
         <Router>
-            <main>
             <NavBar/>
                 <Switch>
                     <Route path='/carrito' component={Cart}/>
@@ -27,7 +26,6 @@ const App = () =>{
                     <Route path='*' component={NotFound}/>
                 </Switch>
             <Footer/>
-            </main>
         </Router>)
 }
 

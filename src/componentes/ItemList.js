@@ -8,7 +8,7 @@ const ItemList = ({id,name,img}) => {
     return (
         <div className='product'>
             <div className='product__info'>
-                <p> {name?.toUpperCase()}</p>
+                <p>{name?.toUpperCase()}</p>
             </div>
             <img  
             src={img}
