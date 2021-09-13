@@ -9,13 +9,13 @@ const initialForm={
     direccion: '',
 }
 
-const validacionForm=(form) =>{
-    const regexTelefono =  /^\d*(\.\d+)?$/
+const validationForm=(form) =>{
+    const regexPhone =  /^\d*(\.\d+)?$/
     const error ={}
 
     if(!form.phone?.trim()){
         error.phone = 'Telefono es requerido'
-    } else if (!regexTelefono.test(form.phone.trim())){
+    } else if (!regexPhone.test(form.phone.trim())){
         error.phone = 'Solo numeros'
     } else if(!form.direccion?.trim()){
         error.direccion = 'Direccion es requerido'
@@ -24,7 +24,7 @@ const validacionForm=(form) =>{
 }
 
 const FormCheckOutAuth = () => {
-    const {form,error,loading,response,handleChange,handleBlur,handleSubmitAuth,orderId} = useForm(initialForm, validacionForm)
+    const {form,error,loading,response,handleChange,handleBlur,handleSubmitAuth,orderId} = useForm(initialForm, validationForm)
     const disabledBoton = Object.keys(error).length ===0
     return (
         <>   

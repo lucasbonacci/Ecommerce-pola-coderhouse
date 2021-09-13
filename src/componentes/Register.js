@@ -11,7 +11,7 @@ const initialForm ={
 }
 
 
-const validacionForm=(form) =>{
+const validationForm=(form) =>{
     const error ={}
     const regexName = /^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$/
     const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
@@ -39,7 +39,7 @@ const validacionForm=(form) =>{
 
 
 const Register = () => {
-    const {form,error,handleChange,handleBlur,handleSubmitRegister} = useForm(initialForm, validacionForm)
+    const {form,error,handleChange,handleBlur,handleSubmitRegister} = useForm(initialForm, validationForm)
     const disabledBoton = Object.keys(error).length ===0
     const authe = useAuth()
     const history = useHistory()

@@ -1,4 +1,4 @@
-.producto__existe{
+.product__exists{
     display: flex;
     text-align: center;
     justify-content: center;
@@ -6,7 +6,7 @@
     background-color: #ccc;
 }
 
-.producto__noexiste{
+.product__notexists{
     font-size: 20px;
     text-align: center;
     margin:20px 0px;

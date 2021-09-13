@@ -10,7 +10,7 @@ const initialForm ={
     password:''
 }
 
-const validacionForm=(form) =>{
+const validationForm=(form) =>{
     const error ={}
     const regexEmail = /^(\w+[/./-]?){1,}@[a-z]+[/.]\w{2,}$/
 
@@ -28,7 +28,7 @@ const validacionForm=(form) =>{
 
 
 const Login = () => {
-    const {form,error,handleChange,handleBlur,handleSubmitLogin} = useForm(initialForm, validacionForm)
+    const {form,error,handleChange,handleBlur,handleSubmitLogin} = useForm(initialForm, validationForm)
     const authe = useAuth()
     const history = useHistory()
 

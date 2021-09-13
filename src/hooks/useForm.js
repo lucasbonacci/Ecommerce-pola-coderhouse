@@ -2,14 +2,14 @@ import { useState } from "react";
 import {useStateValue} from '../context/StateProvider'
 import { getFirestore } from '../firebase/firebase-data'
 import { Timestamp } from 'firebase/firestore'
-import {quantityTotal,carritoTotal} from '../context/Reducer' 
+import {quantityTotal,cartTotal} from '../context/Reducer' 
 import { useHistory } from "react-router";
 import { useAuth } from '../context/AuthContext'
 
 
-export const useForm =(initialForm, validacionForm) => {
+export const useForm =(initialForm, validationForm) => {
 
-    const [{carrito}, enviar] = useStateValue()
+    const [{cart}, dispatch] = useStateValue()
     const [orderId, setOrderId] = useState('')
     const [form,setForm] = useState(initialForm)
     const [error, setError] = useState({error: ''})
@@ -28,13 +28,13 @@ export const useForm =(initialForm, validacionForm) => {
     
     const handleBlur = (e) =>{
         handleChange(e)
-        setError(validacionForm(form))
+        setError(validationForm(form))
     }
 
     const handleSubmit = (e) =>{
         e.preventDefault()
         handleChange(e)
-        setError(validacionForm(form))
+        setError(validationForm(form))
         
         
         if(Object.keys(error).length === 0){
@@ -45,14 +45,14 @@ export const useForm =(initialForm, validacionForm) => {
                     ...form,
                     date: Timestamp.fromDate(new Date())
                 },
-                items: carrito.map(({id,precio,nombre, quantity}) =>({
+                items: cart.map(({id,price,name, quantity}) =>({
                     id,
-                    precio,
-                    nombre,
+                    price,
+                    name,
                     quantity,
                 })),
-                total: carritoTotal(carrito),
-                quantityTotal: quantityTotal(carrito)
+                total: cartTotal(cart),
+                quantityTotal: quantityTotal(cart)
             }
         
             const db = getFirestore()
@@ -60,32 +60,27 @@ export const useForm =(initialForm, validacionForm) => {
             const batch = db.batch()
         
             orders.add(newOrder).then((response) =>{
-                console.log(response)
                 
-                carrito.forEach((item) => {
+                cart.forEach((item) => {
                     const docRef = db.collection('productos').doc(item.id)
                     batch.update(docRef, {stock: item.stock - item.quantity})
-                    console.log(item)
                 });
                 
                 batch.commit()
                 setOrderId(response.id)
                 setLoading(false)
-                enviar({
-                    type: 'vaciarCarrito',
+                dispatch({
+                    type: 'EMPTY_CART',
                 })
             })
             .catch((error)=> console.log(error))
-        } else{
-            alert('Completa el formulario')
-            return
-        }
+        } 
     }
 
     const handleSubmitAuth = (e) =>{
         e.preventDefault()
         handleChange(e)
-        setError(validacionForm(form))
+        setError(validationForm(form))
         
         
         if(Object.keys(error).length === 0){
@@ -98,14 +93,14 @@ export const useForm =(initialForm, validacionForm) => {
                     email: authe.user.email,
                     date: Timestamp.fromDate(new Date())
                 },
-                items: carrito.map(({id,precio,nombre, quantity}) =>({
+                items: cart.map(({id,price,name, quantity}) =>({
                     id,
-                    precio,
-                    nombre,
+                    price,
+                    name,
                     quantity,
                 })),
-                total: carritoTotal(carrito),
-                quantityTotal: quantityTotal(carrito)
+                total: cartTotal(cart),
+                quantityTotal: quantityTotal(cart)
             }
         
             const db = getFirestore()
@@ -113,25 +108,20 @@ export const useForm =(initialForm, validacionForm) => {
             const batch = db.batch()
         
             orders.add(newOrder).then((response) =>{
-                console.log(response)
                 
-                carrito.forEach((item) => {
+                cart.forEach((item) => {
                     const docRef = db.collection('productos').doc(item.id)
                     batch.update(docRef, {stock: item.stock - item.quantity})
-                    console.log(item)
                 });
                 
                 batch.commit()
                 setOrderId(response.id)
                 setLoading(false)
-                enviar({
-                    type: 'vaciarCarrito',
+                dispatch({
+                    type: 'EMPTY_CART',
                 })
             })
             .catch((error)=> console.log(error))
-        } else{
-            alert('Completa el formulario')
-            return
         }
     }
 
@@ -170,7 +160,6 @@ export const useForm =(initialForm, validacionForm) => {
         handleSubmitLogin,
         handleSubmitAuth
     }
-
 }
 
 

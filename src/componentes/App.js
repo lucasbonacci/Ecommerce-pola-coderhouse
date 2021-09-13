@@ -20,7 +20,7 @@ const App = () =>{
                     <Route path='/carrito' component={Cart}/>
                     <Route path='/checkout' component={CheckOut}/>
                     <Route path='/itemDetail/:catId' component={ItemDetailContainer}/>
-                    <Route path='/category/:categoriaId' component={ItemListContainer}/>
+                    <Route path='/category/:categoryId' component={ItemListContainer}/>
                     <Route exact path='/' component={ItemListContainer}/>
                     <Route path='/login' component={Login}/>
                     <Route path='/register' component={Register}/>

@@ -2,24 +2,24 @@ import React from 'react'
 import './css/total.css'
 import CurrencyFormat from 'react-currency-format'
 import { useStateValue } from '../context/StateProvider';
-import {quantityTotal, carritoTotal} from '../context/Reducer' 
+import {quantityTotal, cartTotal} from '../context/Reducer' 
 
 const Total = () => {
-    const [{carrito}] = useStateValue()
+    const [{cart}] = useStateValue()
 
-    let cantidad = quantityTotal(carrito)
+    let quantity = quantityTotal(cart)
     return (
         <div className='total'>
             <CurrencyFormat
                 renderText={(value) => (
                     <>
                         <p>
-                            Total ({cantidad} productos): <strong>{value}</strong>
+                            Total ({quantity} productos): <strong>{value}</strong>
                         </p>
                     </>
                 )}
                 decimalScale={2}
-                value={carritoTotal(carrito)} 
+                value={cartTotal(cart)} 
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"$"}

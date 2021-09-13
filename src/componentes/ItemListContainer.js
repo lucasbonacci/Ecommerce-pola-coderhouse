@@ -8,23 +8,23 @@ import { getFirestore } from '../firebase/firebase-data'
 
 const ItemListContainer =() => {
 
-    const [productos, setProductos] = useState([])
+    const [products, setProducts] = useState([])
     const [loading, setLoading] = useState(false)
-    const { categoriaId } = useParams()
+    const { categoryId } = useParams()
 
     useEffect(() =>{
         const db = getFirestore()
         const itemColecction = db.collection('productos')
         setLoading(true)
 
-        if(categoriaId){
-            itemColecction.where('categoria', "==", categoriaId)
+        if(categoryId){
+            itemColecction.where('categoria', "==", categoryId)
             .get()
             .then(querySnapshot =>{
                 if (querySnapshot.size === 0){
                     alert('no hay productos')
                 } else{
-                    setProductos(querySnapshot.docs.map(document =>({
+                    setProducts(querySnapshot.docs.map(document =>({
                         id: document.id, ...document.data()
                     })))
                     setLoading(false)
@@ -35,7 +35,7 @@ const ItemListContainer =() => {
                 if(querySnapshot.size === 0){
                     alert('no hay productos')
                 } else{
-                    setProductos(querySnapshot.docs.map(document =>({
+                    setProducts(querySnapshot.docs.map(document =>({
                         id: document.id, ...document.data()
                     })))
                     setLoading(false)
@@ -43,24 +43,24 @@ const ItemListContainer =() => {
             })
         }
 
-    },[categoriaId])
+    },[categoryId])
 
     return (
-        <div className='principal'>
+        <div className='home'>
             
-            <div className='principal__container'>
+            <div className='home__container'>
                 <img
-                className='principal__banner'
+                className='home__banner'
                 src={polabanner} 
                 alt="banner pola"
                 />
-                <div className='principal__row'>
+                <div className='home__row'>
                 {loading &&<Loader/>}
-                {!loading && productos.map(e =>{
+                {!loading && products.map(e =>{
                     return(
                     <ItemList 
                     key={e.id}
-                    nombre={e.nombre}
+                    name={e.name}
                     img={e.img}
                     id={e.id}
                     />

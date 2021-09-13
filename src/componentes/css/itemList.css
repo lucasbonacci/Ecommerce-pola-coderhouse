@@ -1,4 +1,4 @@
-.producto{
+.product{
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -13,7 +13,7 @@
     transition: all 300ms;
 }
 
-.producto > img{
+.product > img{
     width: 100%;
     height: 300px;
     object-fit: contain;
@@ -22,21 +22,21 @@
 
 
 
-.producto__info{
+.product__info{
     height: 70px;
     margin-bottom: 15px;
     text-align: center;
 }
 
-.producto:hover{
+.product:hover{
     transform: scale(1.1);
 }
 
-.producto__precio{
+.product__precio{
     margin-top: 5px;
 }
 
-.producto > button{
+.product > button{
     color: white;
     background-color: rgba(26, 0, 0, 0.973);
     margin-top: 10px;
@@ -44,63 +44,56 @@
     border: 3px solid rgb(0, 0, 0);
 }
 
-.producto > button:hover{
+.product > button:hover{
     cursor: pointer;
 }
 
-.producto__botones{
-    display: flex;
-    width: 15%;
-    justify-content: space-between;
-}
 
-.producto__buttom{
+.product__button{
     color: white;
     background-color: rgba(26, 0, 0, 0.973);
     margin-top: 10px;
     border-radius: 5px;
     border: 3px solid rgb(0, 0, 0);
-}
-
-.producto__buttom:hover{
     cursor: pointer;
 }
+
 
 @media (max-width: 420px){
-    .producto{
+    .product{
         width: 60%;
         margin: 10px;
     }
-    .producto__info{
+    .product__info{
         margin-bottom: -70px;
     }
-    .producto > img{
+    .product > img{
         margin-bottom: -30px;
     }
 }
 
 @media (min-width: 420px) and (max-width:836px){
-    .producto{
+    .product{
         width: 30%;
         margin:20px;
     }
-    .producto__info{
+    .product__info{
         margin-bottom: -70px;
     }
-    .producto > img{
+    .product > img{
         margin-bottom: -30px;
     }
 }
 
 @media (min-width: 836px) and (max-width:1240px){
-    .producto{
+    .product{
         width: 20%;
         margin:20px;
     }
-    .producto__info{
+    .product__info{
         margin-bottom: -70px;
     }
-    .producto > img{
+    .product > img{
         margin-bottom: -30px;
     }
 }

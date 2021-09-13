@@ -1,5 +1,5 @@
 import React from 'react'
-import './css/carrito.css'
+import './css/cart.css'
 import ProductosCarrito from './ProductosCarrito'
 import Total from './Total'
 import { useStateValue } from '../context/StateProvider';
@@ -7,54 +7,54 @@ import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
 
 const Cart = () => {
-    const [{carrito}, enviar] = useStateValue()
+    const [{cart}, dispatch] = useStateValue()
     const authe = useAuth()
 
-    const vaciarCarrito = () =>{
-        enviar({
-            type: 'vaciarCarrito',
+    const emptyCart = () =>{
+        dispatch({
+            type: 'EMPTY_CART',
         })
     }
 
-    let compraInvalida
-    let productoPasado
+    let invalidPurchase
+    let overboughtProduct
 
-    for(let i=0; i < carrito.length;i++){
-        if(carrito[i].quantity > carrito[i].stock){
-            compraInvalida = true
-            productoPasado = carrito[i].nombre
+    for(let i=0; i < cart.length;i++){
+        if(cart[i].quantity > cart[i].stock){
+            invalidPurchase = true
+            overboughtProduct = cart[i].nombre
         } 
     }
 
     return (
-        <div className='carrito'>
-            {carrito.length === 0? 
-            <div className='carrito__vacio'>
+        <div className='cart'>
+            {cart.length === 0? 
+            <div className='empty__cart'>
                 <p>Tu carrito esta vacio </p>
-                <Link to='/'><button className="carrito__btn"> Ir a comprar </button></Link></div>
+                <Link to='/'><button className="cart__btn"> Ir a comprar </button></Link></div>
             : 
             <>
-            <div className='carrito__izquierda'>
-                <div className='carrito__titulo'>
-                    {authe.user? <h2>Las compra de {authe.user.email}  </h2> :<h2> Tus compras </h2>}
-                    {carrito.map(e =>{
+            <div className='cart__left'>
+                <div className='cart__title'>
+                    {authe.user? <h2>Las compra de {authe.user.email}</h2>:<h2> Tus compras </h2>}
+                    {cart.map(e =>{
                         return <ProductosCarrito
                             key={e.id}
-                            nombre={e.nombre}
+                            name={e.name}
                             img={e.img}
-                            precio={e.precio}
+                            price={e.price}
                             id={e.id}
                             quantity={e.quantity}
                         />
                     })}
-                <button onClick={vaciarCarrito} className="carrito__btn"> vaciar carrito</button>
+                <button onClick={emptyCart} className="cart__btn"> vaciar carrito</button>
                 </div>
             </div>
             
-            <div className='carrito__derecha'>
+            <div className='cart__right'>
                 <Total/> 
-                {!compraInvalida?<Link to='/checkout'><button disabled={compraInvalida} className='carrito__comprar'>COMPRAR</button></Link>:
-                <p className='carrito__stock'>No puedes pasar al checkout. Estas llevando mas cantidad del stock disponible en el producto <strong>{productoPasado.toUpperCase()}</strong> </p>}
+                {!invalidPurchase?<Link to='/checkout'><button disabled={invalidPurchase} className='cart__buy'>COMPRAR</button></Link>:
+                <p className='cart__stock'>No puedes pasar al checkout. Estas llevando mas cantidad del stock disponible en el producto <strong>{overboughtProduct?.toUpperCase()}</strong> </p>}
             </div>
             </>}
         </div>

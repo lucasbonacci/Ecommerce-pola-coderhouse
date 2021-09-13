@@ -2,13 +2,13 @@ import React from 'react'
 import './css/productocarrito.css'
 import { useStateValue } from '../context/StateProvider'
 
-const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
+const ProductosCarrito = ({name,img,price,id, quantity}) => {
     
-    const [,enviar] = useStateValue()
+    const [,dispatch] = useStateValue()
 
-    const eliminarDelCarrito=()=>{
-        enviar({
-            type:'eliminarDelCarrito',
+    const removeFromCart=()=>{
+        dispatch({
+            type:'REMOVE_FROM_CART',
             id:id,
             
         })
@@ -16,15 +16,15 @@ const ProductosCarrito = ({nombre,img,precio,id, quantity}) => {
 
     return (
         <div className='productoscarrito'>
-            <img className='productoscarrito__img' src={img} alt={nombre}/>
+            <img className='productoscarrito__img' src={img} alt={name}/>
             <div className='productoscarrito__info'>
-                <p className='productoscarrito__nombre'>{nombre.toUpperCase()}</p>
+                <p className='productoscarrito__nombre'>{name?.toUpperCase()}</p>
                 <p className='productoscarrito__price'>
                     <small>$</small>
-                    <strong>{precio}</strong>
+                    <strong>{price}</strong>
                     {quantity ===1? <p>haz comprado una unidad de este producto </p>: <p>haz comprado <strong>{quantity}</strong> unidades de este producto</p>}
                 </p>
-                <button onClick={eliminarDelCarrito}>Eliminar del carrito</button>
+                <button onClick={removeFromCart}>Eliminar del carrito</button>
             </div>
         </div>
     )

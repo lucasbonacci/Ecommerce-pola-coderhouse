@@ -7,11 +7,11 @@ import { getFirestore } from '../firebase/firebase-data'
 
 
 const ItemDetailContainer = () => {
-    const [producto, setProducto] = useState([])
+    const [product, setProduct] = useState([])
     const [loading, setLoading] = useState(false)
     const {catId} = useParams()
 
-    const {img,precio,stock,nombre,descripcion,id} = producto 
+    const {img,price,stock,name,description,id} = product 
 
     useEffect(() =>{
         setLoading(true)
@@ -21,10 +21,10 @@ const ItemDetailContainer = () => {
 
         currentItem.get().then(document =>{
             if(!document.exists){
-                setProducto('noexiste')
+                setProduct('notexists')
                 setLoading(false)
             } else{
-                setProducto({
+                setProduct({
                     id: document.id, ...document.data()
                 })
                 setLoading(false)
@@ -35,20 +35,20 @@ const ItemDetailContainer = () => {
 
     return (
         <>
-        {producto !== 'noexiste'? 
-        <div className='producto__existe'>
+        {product !== 'notexists'? 
+        <div className='product__exists'>
             {loading? <Loader/> :
             <ItemDetail
                 img={img}
-                precio={precio}
+                price={price}
                 stock={stock}
                 key={id}
-                nombre={nombre}
-                descripcion={descripcion}
+                name={name}
+                description={description}
                 id={id}
             />}
         </div>:
-        <p className='producto__noexiste'>El producto no existe</p>}
+        <p className='product__notexists'>El producto no existe</p>}
         </>
 )
 }

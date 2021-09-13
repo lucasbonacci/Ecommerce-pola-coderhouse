@@ -1,5 +1,5 @@
 
-.principal__row{
+.home__row{
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -10,14 +10,14 @@
     padding-bottom: 150px;
 }
 
-.principal__row p{
+.home__row p{
     font-size: 20px;
     font-weight: 600;
 }
 
 
 
-.principal__banner{
+.home__banner{
     width: 100%;
     z-index: -1;
     mask-image: linear-gradient(to bottom, rgba(0, 0,0,1), rgba(0, 0, 0, 0));

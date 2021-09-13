@@ -1,89 +1,88 @@
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 import './css/itemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
 import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom'
 
-const ItemDetail = ({nombre, precio, img, stock, descripcion, id}) => {
+const ItemDetail = ({name, price, img, stock, description, id}) => {
     
 
     const [count, setCount] = useState(1)
-    const [compra, setCompra] = useState(false)
-    const [,enviar] = useStateValue()
-    const [nuevoStock, setNuevoStock] = useState(stock)
+    const [buy, setBuy] = useState(false)
+    const [,dispatch] = useStateValue()
+    const [newStock, setNewStock] = useState(stock)
 
-    const sumar= () =>{
+    const summar= () =>{
         if(count < stock){
             setCount(count + 1)
-            setNuevoStock(stock - count)
         }
     }
 
-    const restar = () =>{
+    const subtract = () =>{
         if(count > 1){
         setCount(count - 1)
-        setNuevoStock(stock - count)
         }
     }
 
     const addToCart=()=>{
-            enviar({
-                type: 'agregarAlCarrito',
+            dispatch({
+                type: 'ADD_TO_CART',
                 item:{
                     id: id,
-                    nombre: nombre,
+                    name: name,
                     img: img,
-                    precio: precio * count,
+                    price: price * count,
                     quantity: count,
                     stock: stock
                 }
-            
             })
-        setCompra(true)
+        setBuy(true)
 }
 
-        
+    useEffect(() =>{
+        setNewStock(stock-count)
+    },)
 
 
 
     return (
         <div className='detail'>
 
-            <div className='detail__producto'>
+            <div className='detail__product'>
                 <img 
                     src={img}
-                    alt='Cartera de cuero negra'
+                    alt={name}
                     />
             </div>
 
             <div className='detail__info'>
-                <h2> {nombre?.toUpperCase()}</h2>
-                <p> {descripcion}</p>
+                <h2> {name?.toUpperCase()}</h2>
+                <p> {description}</p>
                 
                 {stock!==0?<>
-                <p> Stock disponible: <strong>{nuevoStock}</strong></p>
-                <p className='detail__precio'> 
+                <p> Stock disponible: <strong>{newStock}</strong></p>
+                <p className='detail__price'> 
                     <small>$</small>
-                    <strong>{precio * count}</strong>
+                    <strong>{price * count}</strong>
                 </p>
 
-                {!compra? 
+                {!buy? 
                 <>
-                <div className='detail__botones'>
-                    <button onClick={restar}> - </button>
+                <div className='detail__buttons'>
+                    <button onClick={subtract}> - </button>
                     <span>{count}</span>
-                    <button onClick={sumar}> +</button>
+                    <button onClick={summar}> +</button>
                 </div>
                 <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>
                 </>
                 : <>
-                <div className='botoncompra'>
+                <div className='buybutton'>
                     <Link to='/carrito'><button>Finalizar Compra</button></Link>
                     <Link to='/'><button>Seguir Comprando</button></Link>
                 </div>
-                <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {nombre} </p>
+                <p> Se añadio al carrito {count===1? <>una unidad</>: <> {count} unidades</>} de {name} </p>
                 </>}
-                </>:<p className='detail__sinstock'>SIN STOCK</p>}
+                </>:<p className='detail__outofstock'>SIN STOCK</p>}
 
             </div>
         </div>

@@ -3,19 +3,20 @@ import './css/itemList.css'
 import { Link } from "react-router-dom";
 
 
-const ItemList = ({id,nombre,img}) => {
+const ItemList = ({id,name,img}) => {
 
     return (
-        <div className='producto'>
-            <div className='producto__info'>
-                <p> {nombre.toUpperCase()}</p>
+        <div className='product'>
+            <div className='product__info'>
+                <p> {name?.toUpperCase()}</p>
             </div>
-            <img 
+            <img  
             src={img}
-            alt='Cartera de cuero negra'/> 
+            alt={name}
+            /> 
 
             <Link to={`/itemDetail/${id}`}>
-            <button className='producto__buttom'>VER PRODUCTO</button>
+            <button className='product__button'>VER PRODUCTO</button>
             </Link>
         </div>
     )

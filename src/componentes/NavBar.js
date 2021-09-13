@@ -9,15 +9,16 @@ import { useAuth } from '../context/AuthContext'
 
 const NavBar = () =>{
 
-    const [{carrito}] = useStateValue()
+    const [{cart}] = useStateValue()
     const authe = useAuth()
 
     let history = useHistory()
+    
     const onChange = (e) =>{
         history.push(`/${e.target.value}`)
     }
-    console.log(authe)
-    let cantidad = quantityTotal(carrito)
+    let quantity = quantityTotal(cart)
+    
     return (
         <div className="header">
             <Link to='/'>
@@ -49,7 +50,7 @@ const NavBar = () =>{
                     <Link to='/carrito'>
                     <ShoppingCartIcon />
                     </Link>
-                    <span className='header__cartCount' >{cantidad ===0? <></>: cantidad }</span>
+                    <span className='header__cartCount' >{quantity ===0? <></>: quantity }</span>
                 </div>
             </div>
         </div>
