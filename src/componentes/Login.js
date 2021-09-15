@@ -40,16 +40,18 @@ const Login = () => {
             <div className='login__cont'>
                 <h2> Logeate</h2>
                 <form onSubmit={handleSubmitLogin}>
-                    <label>Email</label>
+                    <label htmlFor='email'>Email</label>
                     <input 
+                        id='email'
                         type='text' 
                         value={form.email} 
                         name='email' 
                         onBlur={handleBlur}
                         onChange={handleChange}/>
                     {error.email && <p>{error.email}</p>}
-                    <label>Contraseña</label>
-                    <input 
+                    <label htmlFor='password'>Contraseña</label>
+                    <input
+                        id='password' 
                         type='password' 
                         value={form.password} 
                         name='password' 

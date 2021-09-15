@@ -61,7 +61,7 @@ const Register = () => {
                         value={form.name}
                         />
                     {error.name && <p>{error.name}</p>}
-                    <label>Email</label>
+                    <label htmlFor='email'>Email</label>
                     <input
                         id='email'
                         type='text'  
@@ -71,7 +71,7 @@ const Register = () => {
                         vale={form.email}
                         />
                     {error.email && <p>{error.email}</p>}
-                    <label>Contraseña</label>
+                    <label htmlFor='password'>Contraseña</label>
                     <input
                         id='password'
                         type='password'  
@@ -81,7 +81,7 @@ const Register = () => {
                         vale={form.password} 
                         />
                     {error.password && <p>{error.password}</p>}
-                    <label>Confirmar contraseña</label>
+                    <label htmlFor='confirmpassword'>Confirmar contraseña</label>
                     <input 
                         id='confirmpassword'
                         type='password' 

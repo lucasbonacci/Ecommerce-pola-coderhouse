@@ -9,6 +9,8 @@ const storageItem = () => {
 }
 storageItem()
 
+
+
 export const initialState =  {
     cart: [...localItem],
 }
