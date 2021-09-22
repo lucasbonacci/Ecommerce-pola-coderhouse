@@ -1,18 +1,5 @@
-
-
-let localItem = []
-
-const storageItem = () => {
-    if(localStorage.getItem('cart')){
-        return localItem = JSON.parse(localStorage.getItem('cart'))
-    }
-}
-storageItem()
-
-
-
-export const initialState =  {
-    cart: [...localItem],
+const initialState = {
+    cart: []
 }
 
 
@@ -23,8 +10,8 @@ export const cartTotal = (cart) =>
 export const quantityTotal = (cart) =>
     cart.reduce((quantity, item) => item.quantity + quantity,0)
 
-    
-const reducer = (state, action) => {
+
+const cartReducer = (state = initialState, action) => {
 
     switch(action.type){
         case 'ADD_TO_CART':{
@@ -36,15 +23,13 @@ const reducer = (state, action) => {
                 
                 newCart[index].quantity += action.item.quantity
 
-                newCart[index].precio+= action.item.precio
-                localStorage.setItem('cart', JSON.stringify(newCart))
+                newCart[index].price+= action.item.price
                 return{
                     ...state,
                     cart:[...newCart],
                 }
             } else{
                 let newCart = [...state.cart, action.item]
-                localStorage.setItem('cart', JSON.stringify(newCart))
                 return{
                     ...state,
                     cart: [...newCart]
@@ -59,7 +44,6 @@ const reducer = (state, action) => {
             
             if (index >= 0){
                 newCart.splice(index,1)
-                localStorage.setItem('cart', JSON.stringify(newCart))
             } 
 
             return{
@@ -68,17 +52,16 @@ const reducer = (state, action) => {
             }
 
         case 'EMPTY_CART':
-            localStorage.clear()
             return{
                 ...state,
                 cart: []
             }
+
         default:
             return state
     }
 
 }
 
+export default cartReducer
 
-
-export default reducer

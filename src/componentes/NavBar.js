@@ -3,21 +3,21 @@ import './css/navbar.css'
 import logopola from '../assets/pola.jpg'
 import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";
-import {useStateValue} from '../context/StateProvider'
-import {quantityTotal} from '../context/Reducer' 
+import { quantityTotal } from "../redux/reducers/carritoReducer";
 import { useAuth } from '../context/AuthContext'
+import {useSelector} from 'react-redux'
 
 const NavBar = () =>{
 
-    const [{cart}] = useStateValue()
-    const authe = useAuth()
+    const cart = useSelector(state => state.carritoReducer)
 
+    const authe = useAuth()
     const history = useHistory()
     
     const onChange = (e) =>{
         history.push(`/${e.target.value}`)
     }
-    let quantity = quantityTotal(cart)
+    let quantity = quantityTotal(cart.cart)
     
     return (
         <header className="header">

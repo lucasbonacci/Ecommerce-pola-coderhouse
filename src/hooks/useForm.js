@@ -1,15 +1,19 @@
 import { useState } from "react";
-import {useStateValue} from '../context/StateProvider'
 import { getFirestore } from '../firebase/firebase-data'
 import { Timestamp } from 'firebase/firestore'
-import {quantityTotal,cartTotal} from '../context/Reducer' 
+import {quantityTotal, cartTotal} from  "../redux/reducers/carritoReducer"; 
 import { useHistory } from "react-router";
 import { useAuth } from '../context/AuthContext'
+import {useSelector, useDispatch} from 'react-redux'
+import { emptyCar } from '../redux/actions/carritoActions';
+
+
 
 
 export const useForm =(initialForm, validationForm) => {
 
-    const [{cart}, dispatch] = useStateValue()
+    const cart = useSelector(state => state.carritoReducer)
+    const dispatch = useDispatch()
     const [orderId, setOrderId] = useState('')
     const [form,setForm] = useState(initialForm)
     const [error, setError] = useState({error: ''})
@@ -45,14 +49,14 @@ export const useForm =(initialForm, validationForm) => {
                     ...form,
                     date: Timestamp.fromDate(new Date())
                 },
-                items: cart.map(({id,price,name, quantity}) =>({
+                items: cart.cart.map(({id,price,name, quantity}) =>({
                     id,
                     price,
                     name,
                     quantity,
                 })),
-                total: cartTotal(cart),
-                quantityTotal: quantityTotal(cart)
+                total: cartTotal(cart.cart),
+                quantityTotal: quantityTotal(cart.cart)
             }
         
             const db = getFirestore()
@@ -61,7 +65,7 @@ export const useForm =(initialForm, validationForm) => {
         
             orders.add(newOrder).then((response) =>{
                 
-                cart.forEach((item) => {
+                cart.cart.forEach((item) => {
                     const docRef = db.collection('productos').doc(item.id)
                     batch.update(docRef, {stock: item.stock - item.quantity})
                 });
@@ -69,9 +73,7 @@ export const useForm =(initialForm, validationForm) => {
                 batch.commit()
                 setOrderId(response.id)
                 setLoading(false)
-                dispatch({
-                    type: 'EMPTY_CART',
-                })
+                dispatch(emptyCar())
             })
             .catch((error)=> console.log(error))
         } 
@@ -93,14 +95,14 @@ export const useForm =(initialForm, validationForm) => {
                     email: authe.user.email,
                     date: Timestamp.fromDate(new Date())
                 },
-                items: cart.map(({id,price,name, quantity}) =>({
+                items: cart.cart.map(({id,price,name, quantity}) =>({
                     id,
                     price,
                     name,
                     quantity,
                 })),
-                total: cartTotal(cart),
-                quantityTotal: quantityTotal(cart)
+                total: cartTotal(cart.cart),
+                quantityTotal: quantityTotal(cart.cart)
             }
         
             const db = getFirestore()
@@ -109,7 +111,7 @@ export const useForm =(initialForm, validationForm) => {
         
             orders.add(newOrder).then((response) =>{
                 
-                cart.forEach((item) => {
+                cart.cart.forEach((item) => {
                     const docRef = db.collection('productos').doc(item.id)
                     batch.update(docRef, {stock: item.stock - item.quantity})
                 });
@@ -117,9 +119,7 @@ export const useForm =(initialForm, validationForm) => {
                 batch.commit()
                 setOrderId(response.id)
                 setLoading(false)
-                dispatch({
-                    type: 'EMPTY_CART',
-                })
+                dispatch(emptyCar())
             })
             .catch((error)=> console.log(error))
         }

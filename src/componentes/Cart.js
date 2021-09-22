@@ -2,33 +2,35 @@ import React from 'react'
 import './css/cart.css'
 import ProductosCarrito from './ProductosCarrito'
 import Total from './Total'
-import { useStateValue } from '../context/StateProvider';
 import { Link } from "react-router-dom";
 import { useAuth } from '../context/AuthContext'
+import {useSelector, useDispatch} from 'react-redux'
+import { emptyCar } from '../redux/actions/carritoActions';
+
 
 const Cart = () => {
-    const [{cart}, dispatch] = useStateValue()
     const authe = useAuth()
+    const cart = useSelector(state => state.carritoReducer)
+    const dispatch = useDispatch()
 
-    const emptyCart = () =>{
-        dispatch({
-            type: 'EMPTY_CART',
-        })
+
+    const emptyCartHandler = () =>{
+       dispatch(emptyCar())
     }
 
     let invalidPurchase
     let overboughtProduct
 
-    for(let i=0; i < cart.length;i++){
-        if(cart[i].quantity > cart[i].stock){
+    for(let i=0; i < cart.cart.length;i++){
+        if(cart.cart[i].quantity > cart.cart[i].stock){
             invalidPurchase = true
-            overboughtProduct = cart[i].name
+            overboughtProduct = cart.cart[i].name
         } 
     }
 
     return (
         <main className='cart'>
-            {cart.length === 0? 
+            {cart.cart.length === 0? 
             <div className='empty__cart'>
                 <p>Tu carrito esta vacio </p>
                 <Link to='/'><button className="cart__btn"> Ir a comprar </button></Link></div>
@@ -37,7 +39,7 @@ const Cart = () => {
             <div className='cart__left'>
                 <div className='cart__title'>
                     {authe.user? <h2>Las compra de {authe.user.email}</h2>:<h2> Tus compras </h2>}
-                    {cart.map(e =>{
+                    {cart.cart.map(e =>{
                         return <ProductosCarrito
                             key={e.id}
                             name={e.name}
@@ -47,7 +49,7 @@ const Cart = () => {
                             quantity={e.quantity}
                         />
                     })}
-                <button onClick={emptyCart} className="cart__btn"> vaciar carrito</button>
+                <button onClick={emptyCartHandler} className="cart__btn"> vaciar carrito</button>
                 </div>
             </div>
             

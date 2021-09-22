@@ -1,15 +1,14 @@
 import React from 'react';
 import ReactDOM from 'react-dom'
 import App from  './componentes/App'
-import reducer, { initialState } from './context/Reducer';
-import { StateProvider } from './context/StateProvider';
 import { UserProvider} from './context/AuthContext'
-
+import { Provider } from 'react-redux'
+import store from './redux/store/index'
 
 ReactDOM.render(
-    <StateProvider initialState={initialState} reducer={reducer}>
+    <Provider store={store}>
     <UserProvider>   
         <App/>
     </UserProvider>    
-    </StateProvider>,
+    </Provider>,
     document.querySelector('#root'))

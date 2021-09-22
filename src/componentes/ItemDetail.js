@@ -1,16 +1,20 @@
 import React, {useState, useEffect} from 'react'
 import './css/itemDetail.css'
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart';
-import { useStateValue } from '../context/StateProvider';
 import { Link } from 'react-router-dom'
+import {useSelector, useDispatch} from 'react-redux'
+import { addToCart } from '../redux/actions/carritoActions';
 
 const ItemDetail = ({name, price, img, stock, description, id}) => {
     
 
     const [count, setCount] = useState(1)
     const [buy, setBuy] = useState(false)
-    const [,dispatch] = useStateValue()
     const [newStock, setNewStock] = useState(stock)
+
+    const dispatch = useDispatch()
+
+    const cart = useSelector(state => state.carritoReducer)
 
     const summar= () =>{
         if(count < stock){
@@ -24,27 +28,17 @@ const ItemDetail = ({name, price, img, stock, description, id}) => {
         }
     }
 
-    const addToCart=()=>{
-            dispatch({
-                type: 'ADD_TO_CART',
-                item:{
-                    id: id,
-                    name: name,
-                    img: img,
-                    price: price * count,
-                    quantity: count,
-                    stock: stock
-                }
-            })
-        setBuy(true)
-}
-
     useEffect(() =>{
         setNewStock(stock-count)
     },[stock, count])
 
+    const addTocartHandler = () =>{
+        dispatch(addToCart(name, price, img, stock,id, count))
+        setBuy(true)
+    }
 
 
+    console.log(cart.cart)
     return (
         <div className='detail'>
 
@@ -73,7 +67,7 @@ const ItemDetail = ({name, price, img, stock, description, id}) => {
                     <span>{count}</span>
                     <button onClick={summar}> +</button>
                 </div>
-                <button onClick={addToCart} className='detail__add'> < AddShoppingCartIcon/></button>
+                <button  onClick={addTocartHandler} className='detail__add'> < AddShoppingCartIcon/></button>
                 </>
                 : <>
                 <div className='buybutton'>
@@ -89,5 +83,7 @@ const ItemDetail = ({name, price, img, stock, description, id}) => {
     )
 
 }
+
+
 
 export default ItemDetail

@@ -1,17 +1,15 @@
 import React from 'react'
 import './css/productocarrito.css'
-import { useStateValue } from '../context/StateProvider'
+import { removeFromCart} from '../redux/actions/carritoActions';
+import {useDispatch} from 'react-redux'
+
+
 
 const ProductosCarrito = ({name,img,price,id, quantity}) => {
-    
-    const [,dispatch] = useStateValue()
+    const dispatch = useDispatch()
 
-    const removeFromCart=()=>{
-        dispatch({
-            type:'REMOVE_FROM_CART',
-            id:id,
-            
-        })
+    const removeFromCartHandler=()=>{
+        dispatch(removeFromCart(id))
     }
 
     return (
@@ -24,7 +22,7 @@ const ProductosCarrito = ({name,img,price,id, quantity}) => {
                     <strong>{price}</strong>
                     {quantity ===1? <p>haz comprado una unidad de este producto </p>: <p>haz comprado <strong>{quantity}</strong> unidades de este producto</p>}
                 </p>
-                <button onClick={removeFromCart}>Eliminar del carrito</button>
+                <button onClick={removeFromCartHandler}>Eliminar del carrito</button>
             </div>
         </div>
     )

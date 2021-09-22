@@ -1,13 +1,13 @@
 import React from 'react'
 import './css/total.css'
 import CurrencyFormat from 'react-currency-format'
-import { useStateValue } from '../context/StateProvider';
-import {quantityTotal, cartTotal} from '../context/Reducer' 
+import {useSelector} from 'react-redux'
+import {quantityTotal, cartTotal} from  "../redux/reducers/carritoReducer";
 
 const Total = () => {
-    const [{cart}] = useStateValue()
+    const cart = useSelector(state => state.carritoReducer)
 
-    let quantity = quantityTotal(cart)
+    let quantity = quantityTotal(cart.cart)
     return (
         <div className='total'>
             <CurrencyFormat
@@ -19,7 +19,7 @@ const Total = () => {
                     </>
                 )}
                 decimalScale={2}
-                value={cartTotal(cart)} 
+                value={cartTotal(cart.cart)} 
                 displayType={"text"}
                 thousandSeparator={true}
                 prefix={"$"}
