@@ -33,7 +33,7 @@ const NavBar = () =>{
                 <option vale="" disabled selected>Buscar productos</option>   
                 <option value="">Todos los productos</option>
                 <option value="category/cartera">Carteras</option>
-                <option value="category/joyas">Pendientes</option>
+                <option value="category/joyas">Pendientesss</option>
                 <option value="category/collar">Collares</option>
                 </select>
             </div>
