@@ -1,46 +1,24 @@
-import React, {useState, useEffect} from 'react'
+import React, {useEffect} from 'react'
 import './css/itemListContainer.css'
 import polabanner from '../assets/bannermujer.jpg'
 import ItemList from './ItemList'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
-import { getFirestore } from '../firebase/firebase-data'
+import { useSelector,useDispatch } from 'react-redux'
+import { getProducts, getProductsForId} from '../redux/actions/productosAction'
 
 const ItemListContainer =() => {
 
-    const [products, setProducts] = useState([])
-    const [loading, setLoading] = useState(false)
+    const products = useSelector(state => state.productosReducer)
+    const dispatch = useDispatch()
     const { categoryId } = useParams()
+    const { loading, productos} = products
 
     useEffect(() =>{
-        const db = getFirestore()
-        const itemColecction = db.collection('productos')
-        setLoading(true)
-
         if(categoryId){
-            itemColecction.where('categoria', "==", categoryId)
-            .get()
-            .then(querySnapshot =>{
-                if (querySnapshot.size === 0){
-                    alert('no hay productos')
-                } else{
-                    setProducts(querySnapshot.docs.map(document =>({
-                        id: document.id, ...document.data()
-                    })))
-                    setLoading(false)
-                }
-            })
+            dispatch(getProductsForId(categoryId))
         } else{
-            itemColecction.get().then(querySnapshot =>{
-                if(querySnapshot.size === 0){
-                    alert('no hay productos')
-                } else{
-                    setProducts(querySnapshot.docs.map(document =>({
-                        id: document.id, ...document.data()
-                    })))
-                    setLoading(false)
-                }
-            })
+            dispatch(getProducts())
         }
 
     },[categoryId])
@@ -56,7 +34,7 @@ const ItemListContainer =() => {
                 />
                 <div className='home__row'>
                 {loading &&<Loader/>}
-                {!loading && products.map(e =>{
+                {!loading && productos.map(e =>{
                     return(
                     <ItemList 
                     key={e.id}

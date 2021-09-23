@@ -3,49 +3,34 @@ import ItemDetail from './ItemDetail'
 import { useParams } from 'react-router-dom'
 import Loader from './Loader'
 import './css/itemDetailContainer.css'
-import { getFirestore } from '../firebase/firebase-data'
-
+import { useSelector,useDispatch } from 'react-redux'
+import {getUniqueProduct} from '../redux/actions/productosAction'
 
 const ItemDetailContainer = () => {
-    const [product, setProduct] = useState([])
-    const [loading, setLoading] = useState(false)
+    const dispatch = useDispatch()
+    const products = useSelector(state => state.productosReducer)
     const {catId} = useParams()
 
-    const {img,price,stock,name,description,id} = product 
+    const { loading, productos} = products
+
 
     useEffect(() =>{
-        setLoading(true)
-        const db = getFirestore()
-        const itemColecction = db.collection('productos')
-        const currentItem = itemColecction.doc(catId)
-
-        currentItem.get().then(document =>{
-            if(!document.exists){
-                setProduct('notexists')
-                setLoading(false)
-            } else{
-                setProduct({
-                    id: document.id, ...document.data()
-                })
-                setLoading(false)
-            }
-        })
-        
+        dispatch(getUniqueProduct(catId))
     },[catId])
 
     return (
         <main>
-        {product !== 'notexists'? 
+        {productos !== 'notexists'? 
         <div className='product__exists'>
             {loading? <Loader/> :
             <ItemDetail
-                img={img}
-                price={price}
-                stock={stock}
-                key={id}
-                name={name}
-                description={description}
-                id={id}
+                img={productos.img}
+                price={productos.price}
+                stock={productos.stock}
+                key={productos.id}
+                name={productos.name}
+                description={productos.description}
+                id={productos.id}
             />}
         </div>:
         <p className='product__notexists'>El producto no existe</p>}

@@ -37,8 +37,6 @@ const ItemDetail = ({name, price, img, stock, description, id}) => {
         setBuy(true)
     }
 
-
-    console.log(cart.cart)
     return (
         <div className='detail'>
 
