@@ -20,7 +20,10 @@ export const getProducts = () => (dispatch) =>{
             })
         })
     } catch(err){
-        console.log(err)
+        dispatch({
+            type: actionTypes.PRODUCTOS_ERROR,
+            payload: err
+        })
     }
 }
 
@@ -41,7 +44,10 @@ export const getProductsForId = (id) => (dispatch) =>{
             })
         })
     } catch(err){
-        console.log(err)
+        dispatch({
+            type: actionTypes.PRODUCTOS_ID_ERROR,
+            payload: err
+        })
     }
 }
 
@@ -68,7 +74,10 @@ export const getUniqueProduct = (id) => (dispatch) =>{
             }
         })
     } catch(err){
-        console.log(err)
+        dispatch({
+            type: actionTypes.PRODUCTOS_UNICO_ERROR,
+            payload: err
+        })
     }
 }
 

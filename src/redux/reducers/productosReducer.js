@@ -3,7 +3,8 @@ import actionTypes from "../../constants"
 
 const initialState = {
     productos: [],
-    loading: false
+    loading: false,
+    error: ''
 }
 
 
@@ -21,6 +22,11 @@ export const getProductsReducer = (state= initialState, action) =>{
                 loading: false
             }
 
+        case actionTypes.PRODUCTOS_ERROR:
+            return{
+                error: action.payload
+            }
+
         case actionTypes.PRODUCTOS_ID_REQUEST:
             return{
                 loading: true
@@ -30,6 +36,11 @@ export const getProductsReducer = (state= initialState, action) =>{
             return{
                 productos: action.payload,
                 loading:false
+            }
+
+        case actionTypes.PRODUCTOS_ID_ERROR:
+            return{
+                error: action.payload
             }
 
         case actionTypes.PRODUCTOS_UNICO_REQUEST:
@@ -43,6 +54,10 @@ export const getProductsReducer = (state= initialState, action) =>{
                 loading:false
             }
 
+        case actionTypes.PRODUCTOS_UNICO_ERROR:
+            return {
+                erorr: action.payload
+            }
         default: 
             return state
     }
