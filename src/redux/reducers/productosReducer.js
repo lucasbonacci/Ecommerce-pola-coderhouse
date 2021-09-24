@@ -1,3 +1,5 @@
+import actionTypes from "../../constants"
+
 
 const initialState = {
     productos: [],
@@ -8,34 +10,34 @@ const initialState = {
 
 export const getProductsReducer = (state= initialState, action) =>{
     switch(action.type){
-        case 'PRODUCTOS_REQUEST':
+        case actionTypes.PRODUCTOS_REQUEST:
             return{
                 loading: true
             }
 
-        case 'PRODUCTOS':
+        case actionTypes.PRODUCTOS:
             return {
                 productos: action.payload,
                 loading: false
             }
 
-        case 'PRODUCTOS_ID_REQUEST':
+        case actionTypes.PRODUCTOS_ID_REQUEST:
             return{
                 loading: true
             }
 
-        case 'PRODUCTOS_ID':
+        case actionTypes.PRODUCTOS_ID:
             return{
                 productos: action.payload,
                 loading:false
             }
 
-        case 'PRODUCTOS_UNICO_REQUEST':
+        case actionTypes.PRODUCTOS_UNICO_REQUEST:
             return {
                 loading: true
             }
 
-        case 'PRODUCTOS_UNICO':
+        case actionTypes.PRODUCTOS_UNICO:
             return {
                 productos: action.payload,
                 loading:false

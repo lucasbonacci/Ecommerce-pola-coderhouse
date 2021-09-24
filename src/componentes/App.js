@@ -2,7 +2,6 @@ import React from 'react'
 import NavBar from './NavBar'
 import ItemListContainer from './ItemListContainer'
 import Cart from './Cart'
-import Footer from './Footer'
 import './css/app.css'
 import ItemDetailContainer from './ItemDetailContainer'
 import {BrowserRouter as Router, Switch, Route} from 'react-router-dom' 
@@ -25,7 +24,6 @@ const App = () =>{
                     <Route path='/register' component={Register}/>
                     <Route path='*' component={NotFound}/>
                 </Switch>
-            <Footer/>
         </Router>)
 }
 

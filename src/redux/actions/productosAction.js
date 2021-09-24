@@ -1,17 +1,19 @@
 import { getFirestore } from '../../firebase/firebase-data'
+import actionTypes from "../../constants"
 
 
 
-export const getProducts = () => async (dispatch) =>{
+
+export const getProducts = () => (dispatch) =>{
     try{
         dispatch({
-            type: 'PRODUCTOS_REQUEST'
+            type:  actionTypes.PRODUCTOS_REQUEST
         })
         const db = getFirestore()
         const itemColecction = db.collection('productos')
-        await itemColecction.get().then(querySnapshot =>{
+        itemColecction.get().then(querySnapshot =>{
             dispatch({
-                type: 'PRODUCTOS',
+                type: actionTypes.PRODUCTOS,
                 payload: querySnapshot.docs.map(document =>({
                     id: document.id, ...document.data()
                 }))
@@ -23,16 +25,16 @@ export const getProducts = () => async (dispatch) =>{
 }
 
 
-export const getProductsForId = (id) => async(dispatch) =>{
+export const getProductsForId = (id) => (dispatch) =>{
     try{
         dispatch({
-            type: 'PRODUCTOS_ID_REQUEST'
+            type: actionTypes.PRODUCTOS_ID_REQUEST
         })
         const db = getFirestore()
         const itemColecction = db.collection('productos')
-        await itemColecction.where('categoria', "==", id).get().then(querySnapshot =>{
+        itemColecction.where('categoria', "==", id).get().then(querySnapshot =>{
             dispatch({
-                type: 'PRODUCTOS_ID',
+                type: actionTypes.PRODUCTOS_ID,
                 payload: querySnapshot.docs.map(document =>({
                     id: document.id, ...document.data()
                 }))
@@ -43,23 +45,23 @@ export const getProductsForId = (id) => async(dispatch) =>{
     }
 }
 
-export const getUniqueProduct = (id) => async(dispatch) =>{
+export const getUniqueProduct = (id) => (dispatch) =>{
     try{
         dispatch({
-            type: 'PRODUCTOS_UNICO_REQUEST'
+            type: actionTypes.PRODUCTOS_UNICO_REQUEST
         })
         const db = getFirestore()
         const itemColecction = db.collection('productos')
         const currentItem = itemColecction.doc(id)
-        await currentItem.get().then(document =>{
+        currentItem.get().then(document =>{
             if(!document.exists){
                 dispatch({
-                    type: 'PRODUCTOS_UNICO',
+                    type: actionTypes.PRODUCTOS_UNICO,
                     payload: 'notexists'
                 })
             } else{
                 dispatch({
-                    type: 'PRODUCTOS_UNICO',
+                    type: actionTypes.PRODUCTOS_UNICO,
                     payload: {
                         id:document.id, ...document.data()}
                 })

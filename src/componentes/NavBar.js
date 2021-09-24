@@ -5,11 +5,13 @@ import ShoppingCartIcon from '@material-ui/icons/ShoppingCart';
 import { Link, useHistory } from "react-router-dom";
 import { quantityTotal } from "../redux/reducers/carritoReducer";
 import { useAuth } from '../context/AuthContext'
-import {useSelector} from 'react-redux'
+import {useSelector,useDispatch} from 'react-redux'
+import { getProducts } from "../redux/actions/productosAction";
 
 const NavBar = () =>{
 
     const cart = useSelector(state => state.carritoReducer)
+    const dispatch = useDispatch()
 
     const authe = useAuth()
     const history = useHistory()
@@ -18,11 +20,15 @@ const NavBar = () =>{
         history.push(`/${e.target.value}`)
     }
     let quantity = quantityTotal(cart.cart)
+
+    const getProductsHandler = () =>{
+        dispatch(getProducts())
+    }
     
     return (
         <header className="header">
             <Link to='/'>
-                <img className="header__logo"
+                <img onClick={getProductsHandler} className="header__logo"
                 src={logopola}
                 alt="pola accesorios" />
             </Link>

@@ -1,7 +1,9 @@
-export const addToCart = (name, price, img, stock,id, count) => async(dispatch) =>{
+import actionTypes from "../../constants"
+
+export const addToCart = (name, price, img, stock,id, count) => (dispatch) =>{
     dispatch({
-        type: 'ADD_TO_CART',
-        item: {
+        type: actionTypes.ADD_TO_CART,
+        payload: {
             id: id,
             name: name,
             price: price * count,
@@ -13,16 +15,16 @@ export const addToCart = (name, price, img, stock,id, count) => async(dispatch) 
 }
 
 
-export const emptyCar = () => async (dispatch) =>{
+export const emptyCar = () => (dispatch) =>{
     dispatch({
-        type: 'EMPTY_CART'
+        type: actionTypes.EMPTY_CART
     })
 }
 
 
-export const removeFromCart = (id)  => async(dispatch) =>{
+export const removeFromCart = (id)  => (dispatch) =>{
     dispatch({
-        type: 'REMOVE_FROM_CART',
-        id: id
+        type: actionTypes.REMOVE_FROM_CART,
+        id
     })
 }

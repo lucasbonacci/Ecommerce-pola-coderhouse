@@ -21,7 +21,9 @@ const ItemListContainer =() => {
             dispatch(getProducts())
         }
 
-    },[categoryId])
+    },[categoryId, dispatch])
+
+    console.log(products)
 
     return (
         <main className='home'>
@@ -34,7 +36,7 @@ const ItemListContainer =() => {
                 />
                 <div className='home__row'>
                 {loading &&<Loader/>}
-                {!loading && productos.map(e =>{
+                {!loading && productos?.map(e =>{
                     return(
                     <ItemList 
                     key={e.id}

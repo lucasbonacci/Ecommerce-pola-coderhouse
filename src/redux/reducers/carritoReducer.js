@@ -1,3 +1,6 @@
+import actionTypes from "../../constants"
+
+
 const initialState = {
     cart: []
 }
@@ -14,22 +17,22 @@ export const quantityTotal = (cart) =>
 const cartReducer = (state = initialState, action) => {
 
     switch(action.type){
-        case 'ADD_TO_CART':{
-            let itemInCart = state.cart.some(item => item.id === action.item.id)
+        case actionTypes.ADD_TO_CART:{
+            let itemInCart = state.cart.some(item => item.id === action.payload.id)
 
             if (itemInCart){
-                let index = state.cart.findIndex(el => el.id === action.item.id)
+                let index = state.cart.findIndex(el => el.id === action.payload.id)
                 let newCart = state.cart
                 
-                newCart[index].quantity += action.item.quantity
+                newCart[index].quantity += action.payload.quantity
 
-                newCart[index].price+= action.item.price
+                newCart[index].price+= action.payload.price
                 return{
                     ...state,
                     cart:[...newCart],
                 }
             } else{
-                let newCart = [...state.cart, action.item]
+                let newCart = [...state.cart, action.payload]
                 return{
                     ...state,
                     cart: [...newCart]
@@ -37,7 +40,7 @@ const cartReducer = (state = initialState, action) => {
             }
         }
         
-        case 'REMOVE_FROM_CART':
+        case actionTypes.REMOVE_FROM_CART:
             const index = state.cart.findIndex(
                 (cartItem) => cartItem.id === action.id)
             let newCart = [...state.cart]
@@ -51,7 +54,7 @@ const cartReducer = (state = initialState, action) => {
                 cart: [...newCart]
             }
 
-        case 'EMPTY_CART':
+        case actionTypes.EMPTY_CART:
             return{
                 ...state,
                 cart: []
