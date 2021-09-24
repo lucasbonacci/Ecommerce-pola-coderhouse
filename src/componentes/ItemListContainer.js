@@ -23,7 +23,6 @@ const ItemListContainer =() => {
 
     },[categoryId, dispatch])
 
-    console.log(products)
 
     return (
         <main className='home'>
